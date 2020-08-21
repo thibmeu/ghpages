@@ -33,12 +33,12 @@ They join the [schemes registered at IANA](https://www.iana.org/assignments/uri-
 
 The navigator API has, for quite some time, had the ability to [register custom protocol handler](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/registerProtocolHandler). This is how Gmail can handle mail addresses URLs starting with `mailto:`, or your favorite torrent client can recognise magnet link with `magnet:`.
 
-To register an IPFS handler, the code would be the following
+To register an IPNS handler, the code would be the following
 
 ```javascript
 navigator.registerProtocolHandler(
-	"ipfs", // scheme
-    "https://cloudflare-ipfs.com/ipfs/%s", // Gateway URL
+	"ipns", // scheme
+    "https://cloudflare-ipfs.com/ipns/%s", // Gateway URL
     "Cloudflare IPFS Gateway", // title, displayed to the user at registration time
 )
 ```
