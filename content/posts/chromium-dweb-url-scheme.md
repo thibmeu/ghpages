@@ -23,7 +23,7 @@ Website gateways, such as Cloudflare IPFS Gateway or IPFS.io would be able to us
 | | `dweb` | |
 | [Ethereum Foundation](https://ethereum.org) | `ethereum` | `ethereum://0x89205a3a3b2a69de6dbf7f01ed13b2108b2c43e7/transfer?address=0x8e23ee67d1332ad560396262c48ffbb01f93d052&uint256=1` |
 | [Dat Foundation](https://dat.foundation) | `hyper` | `hyper://778f8d955175c92e4ced5e4f5563f69bfec0c86cc6f670352c457943666fe639/dat_intro.gif` |
-| [Protocol Labs](https://protocol.ai) | `ipfs` | `ipfs://QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/ |
+| [Protocol Labs](https://protocol.ai) | `ipfs` | `ipfs://QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/` |
 | [Protocol Labs](https://protocol.ai) | `ipns` | `ipns://en.wikipedia-on-ipfs.org/wiki/`|
 | [Fraction](https://fraction.io/) | `ssb` | |
 
@@ -31,7 +31,7 @@ They join the [schemes registered at IANA](https://www.iana.org/assignments/uri-
 
 # Registering protocol handler
 
-The navigator API has, for quite some time, had the ability to [register custom protocol handler](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/registerProtocolHandler). This is how GMail can handle mail addresses URLs starting with `mailto:`, or your favorite torrent client can recognise magnet link with `magnet:`.
+The navigator API has, for quite some time, had the ability to [register custom protocol handler](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/registerProtocolHandler). This is how Gmail can handle mail addresses URLs starting with `mailto:`, or your favorite torrent client can recognise magnet link with `magnet:`.
 
 To register an IPFS handler, the code would be the following
 
@@ -59,7 +59,7 @@ We could imagine `ipns://uniswap.eth` or even `ipns://uniswap.crypto` . Both ENS
 
 ## Client side verification
 
-Ultimately, if there are (and I don't know) web workers capabale of handling these newly safelisted schemes, there would be a way towards client side content verification. And this is major.
+Ultimately, if there are (and I don't know) [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) capabale of handling these newly safelisted schemes, there would be a way towards client side content verification. And this is major.
 
 We could imagine a service worker running and verifying the hash of the received content. It would provide a strong guarantee about the content that is being served, without requiring any extensions or local process to be installed.
 
