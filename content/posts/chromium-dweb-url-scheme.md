@@ -11,7 +11,7 @@ series = []
 
 # Chromium safelist dweb URL schemes
 
-Today, as part of a [PR by Frédéric Wang](https://chromium.googlesource.com/chromium/src/+/4e8ed0cecce04c5c55dd84a09e4df0d0f11c660f), Chromium allows website to register their ability to support distributed web URL schemes.
+Today, as part of a [change by Frédéric Wang](https://chromium.googlesource.com/chromium/src/+/4e8ed0cecce04c5c55dd84a09e4df0d0f11c660f), Chromium allows website to register their ability to support distributed web URL schemes.
 
 Website gateways, such as Cloudflare IPFS Gateway or IPFS.io would be able to use Chrome navigator API to serve [Native DWeb URLs](https://docs.ipfs.io/how-to/address-ipfs-on-web/#native-urls). These new schemes are the following:
 
