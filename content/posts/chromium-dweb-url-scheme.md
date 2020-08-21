@@ -13,11 +13,11 @@ series = []
 
 Today, as part of a [PR by Frédéric Wang](https://chromium.googlesource.com/chromium/src/+/4e8ed0cecce04c5c55dd84a09e4df0d0f11c660f), Chromium allows website to register their ability to support distributed web URL schemes.
 
-Website gateways, such as Cloudflare IPFS Gateway or IPFS.io would be able to use Chrome navigator API to serve [Native DWeb URLs](https://docs.ipfs.io/how-to/address-ipfs-on-web/#native-urls). These new schemes are the following
+Website gateways, such as Cloudflare IPFS Gateway or IPFS.io would be able to use Chrome navigator API to serve [Native DWeb URLs](https://docs.ipfs.io/how-to/address-ipfs-on-web/#native-urls). These new schemes are the following:
 
 | Organisation | scheme | Example URL |
 |:------------ |:------ |:----------- |
-| [Cabal Club](https://cblgh.org/) | `cabal` |  |
+| [Cabal Club](https://cabal.chat/) | `cabal` | `cabal://1eef9ad64e284691b7c6f6310e39204b5f92765e36102046caaa6a7ff8c02d74` |
 | [Dat Foundation](https://dat.foundation) | `dat` | `dat://778f8d955175c92e4ced5e4f5563f69bfec0c86cc6f670352c457943666fe639/dat_intro.gif`|
 | [W3C](https://w3c.github.io/did-core) | `did` | `did:example:123456` |
 | | `dweb` | |
@@ -25,7 +25,7 @@ Website gateways, such as Cloudflare IPFS Gateway or IPFS.io would be able to us
 | [Dat Foundation](https://dat.foundation) | `hyper` | `hyper://778f8d955175c92e4ced5e4f5563f69bfec0c86cc6f670352c457943666fe639/dat_intro.gif` |
 | [Protocol Labs](https://protocol.ai) | `ipfs` | `ipfs://QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/` |
 | [Protocol Labs](https://protocol.ai) | `ipns` | `ipns://en.wikipedia-on-ipfs.org/wiki/`|
-| [Fraction](https://fraction.io/) | `ssb` | |
+| [Scuttlebutt](https://scuttlebutt.nz/) | `ssb` | |
 
 They join the [schemes registered at IANA](https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml) that make it into web browsers.
 
@@ -59,12 +59,12 @@ We could imagine `ipns://uniswap.eth` or even `ipns://uniswap.crypto` . Both ENS
 
 ## Client side verification
 
-Ultimately, if there are (and I don't know) [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) capabale of handling these newly safelisted schemes, there would be a way towards client side content verification. And this is major.
+Ultimately, if there are (and I don't know) [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) capable of handling these newly safelisted schemes, there would be a way towards client side content verification. And this is major.
 
 We could imagine a service worker running and verifying the hash of the received content. It would provide a strong guarantee about the content that is being served, without requiring any extensions or local process to be installed.
 
 # Looking forward
 
 This step from Chromium would allow further experimentation in the distributed web.
-While having the browser resolve and handle these scheme would make sense, allowing websites to register their ability to handle them should provide a fertile ground for innovation.
+While having the browser resolve and handle these schemes would make sense, allowing websites to register their ability to handle them should provide a fertile ground for innovation.
 
