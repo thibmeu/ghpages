@@ -20,22 +20,25 @@ pygmentscodefencesguesssyntax = true
     hidecredits = false
     hidecopyright = true
 
+    colorScheme = "auto"
+    hidecolorschemetoggle = false
+
     math = false
 
 # Social links
 [[params.social]]
     name = "Github"
-    icon = "fab fa-github fa-2x"
+    icon = "fa fa-github fa-2x"
     weight = 1
     url = "https://github.com/thibmeu/"
 [[params.social]]
     name = "Twitter"
-    icon = "fab fa-twitter fa-2x"
+    icon = "fa fa-twitter fa-2x"
     weight = 2
     url = "https://twitter.com/thibmeu/"
 [[params.social]]
     name = "RSS"
-    icon = "fas fa-rss fa-2x"
+    icon = "fa fa-rss fa-2x"
     weight = 3
     url = "/index.xml"
 
@@ -47,5 +50,5 @@ pygmentscodefencesguesssyntax = true
 
 [[menu.main]]
     name = "Links"
-    weight = 1
+    weight = 2
     url  = "links/"
