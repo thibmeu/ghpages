@@ -44,21 +44,21 @@ The ask from Youtube feels an extension of showing a card to buy alcohol or to e
 
 And to their defence, they are not the only one asking for my ID card. In fact, most services I use are moving to this type of check. This is labelled as Know Your Customer (KYC) policies.
 
-For what I recall, the first service asking me to upload my identity card was my bank. Then came an airplane company. Then a company mandated by an estate agent. Now Youtube.
+For what I recall, the first service asking me to upload my identity card was my bank. Then came an airline company. Then a company mandated by an estate agent. Now Youtube.
 
-Is this really necessary? I put money on my bank account monthly, I fly regularly with my airplane company, and I have a deposit with my estate agent. Youtube probably has more data than all of these companies combined, and is still asking for some verification.
+Is this really necessary? I put money on my bank account monthly, I fly regularly with my airline company, and I have a deposit with my estate agent. Youtube probably has more data than all of these companies combined, and is still asking for some verification.
 
-The thing that depresses me the most is when they all come at the end of the year with shiny web interfaces telling me how great the year with me was. The bank telling me I spent hundreds in groceries, the airplane that it's missing me, the estate agent that my rented flat is the best they've ever seen. And Youtube celebrating creators I don't follow. So clearly, they have data, they know me. Nevertheless, they still ask me.
+The thing that depresses me the most is when they all come at the end of the year with shiny web interfaces telling me how great the year with me was. The bank telling me I spent hundreds in groceries, the airline that it's missing me, the estate agent that my rented flat is the best they've ever seen. And Youtube celebrating creators I don't follow. So clearly, they have data, they know me. Nevertheless, they still ask me.
 
 ## The cost to user
 
-I should not feel concern but I am. We are in 2021. It is easier than ever to impersonate a website. Most users do not know basic security principles. I probably don't either.
+I should not feel concern but I am. We are in 2021. It is easier than ever to [impersonate a website](https://patents.google.com/patent/US7370015B2/en). Most users do [not know basic security principles](https://dl.acm.org/doi/abs/10.1145/2858036.2858214). I probably don't either.
 
-And with all this in mind, most companies require users to upload sensitive information via web forms. Companies that do not have an actual need for it! Youtube does not, my estate agent does not, my airplane company falls into a category I wish would not. And my bank, well, is my bank.
+And with all this in mind, most companies require users to upload sensitive information via web forms. Companies that do not have an actual need for it! Youtube does not, my estate agent does not, my airline company falls into a category I wish would not. And my bank, well, is my bank.
 
 The KYC system is worse than it looks. Once one of the company you have KYC-ed with falls victim of a breach, your online identity is compromised everywhere. With a manual verification, the attacker can now impersonate you in most of your accounts. ID cards don't lie.
 
-A remedial to this issue came when companies started asking for a unique passcode (usually 6 digits) to be written down when uploading the picture of the ID card. I am still unsure how this helps. Sure, it delays the scammers that got ID before, but we are in 2021; Adobe Photoshop is more than 30 years old. Moreover, computer generated pictures start to look good, very good.
+A remedial to this issue came when companies started asking for a unique passcode (usually 6 digits) to be written down when uploading the picture of your ID card. I am still unsure how this helps. Sure, it delays the scammers that got ID before, but we are in 2021; Adobe Photoshop is more than [30 years old](https://en.wikipedia.org/wiki/Adobe_Photoshop). Moreover, computer generated pictures start to look good, very good.
 
 ![Picture of generated.photos](/images/why-give-id-card-02.png)
 
@@ -68,7 +68,7 @@ In the end, users pay the cost. They are the ones which credentials get compromi
 
 This post could have ended here. Me ranting that things were better before, pointing out issues in the way data is being handle by tech companies. However, the picture would not be complete. I think there are ways to make this better.
 
-First, no company should ask me for documents defining my identity. These are _very_ sensitive data and I don't trust any company with them. No matter how secure they are, they will have a breach. This is trickier for services that have actual legal requirements to do so, such as my bank.
+First, no company should ask me for documents defining my identity. These are _very_ sensitive data and I don't trust any company with them. No matter how secure they are, they [will have a breach](https://en.wikipedia.org/wiki/List_of_data_breaches). This is [trickier](https://onlinelibrary.wiley.com/doi/abs/10.1111/lsi.12303) for services that have actual legal requirements to do so, such as my bank.
 
 Second, if your password system does not offer Multi-Factor Authentication (MFA), do not bother ask for secure documents. Asking for specific letters in a second password does not count as MFA. If you are expecting me to trust you are doing everything possible to store my documents securely, apply standard security practices. I don't care about "but our telephone support needs to know the 3rd character of your password". This is a no!
 
