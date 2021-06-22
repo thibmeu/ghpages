@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Colours side by side</title>
+    <script type="text/javascript">
+      const MAX_RGB = 256
+
+      const getRandomInt = (max) =>
+        Math.floor(Math.random() * max)
+
+      const draw = () => {
+        const canvas = document.querySelector('canvas')
+        if (canvas.getContext) {
+          canvas.width = canvas.offsetWidth
+      	  canvas.height = canvas.offsetHeight
+          const colour = { r: getRandomInt(MAX_RGB), g: getRandomInt(MAX_RGB), b: getRandomInt(MAX_RGB) }
+          const complement = { r: MAX_RGB-colour.r, g: MAX_RGB-colour.g, b: MAX_RGB-colour.b }
+
+          const ctx = canvas.getContext('2d')
+
+          // setting the background
+          ctx.fillStyle = `rgb(${colour.r}, ${colour.g}, ${colour.b})`
+          ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+          ctx.fillStyle = `rgb(${complement.r}, ${complement.g}, ${complement.b})`
+          ctx.beginPath()
+          ctx.moveTo(getRandomInt(canvas.width), 0)
+          ctx.lineTo(getRandomInt(canvas.width), canvas.height)
+          ctx.lineTo(canvas.width, canvas.height)
+          ctx.lineTo(canvas.width, 0)
+          ctx.fill()
+        }
+      }
+    </script>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body, html {
+        height: 0;
+      }
+
+      canvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body onload="draw()">
+    <canvas></canvas>
+  </body>
+</html>
+
