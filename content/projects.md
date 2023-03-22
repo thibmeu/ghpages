@@ -2,7 +2,14 @@
 title: Projects
 ---
 
-Browser based projects
+## dee
+
+![dee console gif](/images/dee.gif)
+
+Retrieve public randomness, and encrypt your files to the future. dee provides a drand client, and support for timelock encryption.
+
+[Link](https://github.com/thibmeu/drand-rs)
+
 
 ## Colours side by side
 
