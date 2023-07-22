@@ -1,0 +1,5 @@
+---
+title: "New in Git: switch and restore"
+date: 2021-08-01
+externalLink: https://www.banterly.net/2021/07/31/new-in-git-switch-and-restore/
+---
