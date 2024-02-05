@@ -1,6 +1,5 @@
 ---
-title: "Cannot find title"
+title: "asn1js"
 date: 2024-01-13
-externalLink: asn1js
-https://asn1js.org/
+externalLink: https://asn1js.org/
 ---
