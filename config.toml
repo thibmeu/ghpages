@@ -1,4 +1,4 @@
-baseurl = "https://thibmeu.github.io/ghpages"
+baseurl = "https://thibmeu.github.io/"
 title = "Thibault Meunier"
 theme = "hugo-coder"
 languagecode = "en"
