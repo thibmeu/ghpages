@@ -13,7 +13,7 @@ pygmentscodefencesguesssyntax = true
 
 [params]
     author = "Thibault Meunier"
-    info = "I'm talking to computers to make them work"
+    info = "I talk to computers to make them work"
     description = "Thibault Meunier's personal website"
     keywords = "blog,developer,personal"
 
@@ -32,10 +32,10 @@ pygmentscodefencesguesssyntax = true
     weight = 1
     url = "https://github.com/thibmeu/"
 [[params.social]]
-    name = "Twitter"
-    icon = "fa fa-twitter fa-2x"
+    name = "Bluesky"
+    icon = "fa-brands fa-bluesky fa-2x"
     weight = 2
-    url = "https://twitter.com/thibmeu/"
+    url = "https://bsky.app/profile/thibmeu.com/"
 [[params.social]]
     name = "RSS"
     icon = "fa fa-rss fa-2x"

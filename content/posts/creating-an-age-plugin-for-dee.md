@@ -7,7 +7,6 @@ tags = ["tlock", "age", "cryptography", "cli"]
 categories = []
 externalLink = ""
 series = []
-
 +++
 
 Given you have two tools that work on their own, with a similar interfaces, how complex can it be to integrate primitives from one tool into another? It turns out harder than expected. In this blog, I'll discuss my experience understanding, designing, and implementing an age plugin for tlock.

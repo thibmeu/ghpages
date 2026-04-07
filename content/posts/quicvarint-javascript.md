@@ -1,0 +1,81 @@
++++
+date = 2030-01-08T08:00:00Z
+title = "quicvarint"
+description = "Encoding variable length integer in TypeScript"
+slug = "" 
+tags = ["varint", "2msb", "cryptography", "typescript", "rfc-implementation"]
+categories = []
+externalLink = ""
+series = []
++++
+
+How do you encode an integer on the wire? Fixed-size works until you want to send `1` and you're burning 8 bytes on zeroes. Variable-length encoding trades a bit of complexity for smaller payloads.
+
+QUIC defines its own scheme in [RFC 9000](https://www.rfc-editor.org/rfc/rfc9000.html#name-variable-length-integer-enc): the 2-MSB varint. The two most significant bits of the first byte tell you how many bytes follow — 1, 2, 4, or 8. The remaining bits are the value.
+
+```
+0b00xxxxxx  →  1 byte,  max           63
+0b01xxxxxx  →  2 bytes, max        16383
+0b10xxxxxx  →  4 bytes, max   1073741823
+0b11xxxxxx  →  8 bytes, max 2147483647
+```
+
+Most values in a protocol fit in 1 or 2 bytes. You only pay for what you need.
+
+# Why
+
+I needed this for [ohttp-ts](https://github.com/thibmeu/ohttp-ts) while implementing Oblivious HTTP. OHTTP borrows binary framing from HPKE, which in turn borrows from QUIC. I looked for an existing package, found nothing small and typed with no dependencies. So I wrote it.
+
+# Usage
+
+```typescript
+import { encode, decode, MAX } from "quicvarint"
+
+const n = 1234
+const { value, usize } = decode(encode(n))
+console.log(value, usize) // 1234 2
+```
+
+`MAX` is `2147483647`. `encode` also accepts an explicit length if the framing expects a fixed-width field; it picks the minimum otherwise.
+
+# Implementation
+
+```typescript
+export const encode = (n: number): Uint8Array => {
+    const bytes = new Uint8Array(length(n))
+    const BYTE = 0b1111_1111
+    switch (bytes.length) {
+        case 1:
+            bytes[0] = 0b0000_0000 | (n & 0x3f)
+            break
+        case 2:
+            bytes[0] = 0b0100_0000 | ((n >> 8) & 0x3f)
+            bytes[1] = n & BYTE
+            break
+        case 4:
+            bytes[0] = 0b1000_0000 | ((n >> 24) & 0x3f)
+            bytes[1] = (n >> 16) & BYTE
+            bytes[2] = (n >> 8) & BYTE
+            bytes[3] = n & BYTE
+            break
+        case 8:
+            bytes[0] = 0b1100_0000
+            bytes[4] = (n >> 24) & BYTE
+            bytes[5] = (n >> 16) & BYTE
+            bytes[6] = (n >> 8) & BYTE
+            bytes[7] = n & BYTE
+            break
+    }
+    return bytes
+}
+```
+
+The binary literals match the table above: `0b0100_0000` is the 2-byte prefix, the remaining 6 bits carry the high byte of the value. In the 8-byte case, bytes 1–3 stay zero — the package only goes up to 32-bit integers.
+
+Decoding reads the prefix, masks it off, and shifts the remaining bytes into the value. The `read` variant does the same from a `DataView` at an offset, useful when parsing a larger buffer.
+
+```bash
+npm install quicvarint
+```
+
+Source on [GitHub](https://github.com/thibmeu/quicvarint).
