@@ -15,6 +15,8 @@ Retrieve public randomness, and encrypt your files to the future. dee provides a
 
 ## ohttp.info
 
+![ohttp.info](/images/ohttp.info.png)
+
 A site I built to explain [Oblivious HTTP](https://ohttp.info) (RFC 9458): routing requests through a relay so the target server never sees your IP. It's deployed in Apple Private Cloud Compute, Google Safe Browsing, and Firefox Telemetry — which is a decent sign the spec works.
 
 [Link](https://ohttp.info)
