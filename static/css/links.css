@@ -1,0 +1,13 @@
+/* Grid layout for link list items: date | title | tags */
+@media only screen and (min-width: 768.1px) {
+  .list ul:not(.pagination) li {
+    display: grid;
+    grid-template-columns: 20rem 1fr auto;
+    align-items: baseline;
+    column-gap: 1.5rem;
+  }
+
+  .list ul:not(.pagination) li .date {
+    margin-right: 0;
+  }
+}
