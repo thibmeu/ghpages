@@ -5,6 +5,9 @@ languagecode = "en"
 defaultcontentlanguage = "en"
 
 paginate = 20
+
+[taxonomies]
+  tag = "tags"
 canonifyurls = true
 
 pygmentsstyle = "monokai"

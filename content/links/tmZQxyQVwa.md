@@ -8,4 +8,5 @@ title: "
     "
 date: 2021-02-10
 externalLink: https://transparency.dev/
+tags: ["cryptography", "distributed-systems"]
 ---

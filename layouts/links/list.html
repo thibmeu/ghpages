@@ -1,0 +1,22 @@
+{{ define "title" }}{{ .Title }} · {{ .Site.Title }}{{ end }}
+{{ define "content" }}
+<section class="container list">
+  <header>
+    <h1 class="title">
+      <a class="title-link" href="{{ .Permalink | safeURL }}">{{ .Title }}</a>
+    </h1>
+  </header>
+  {{ .Content }}
+  {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006" }}
+  <ul>
+    {{ range .Paginator.Pages }}
+    <li>
+      <span class="date">{{ .Date | time.Format $dateFormat }}</span>
+      <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
+      {{ with .GetTerms "tags" }}{{ partial "taxonomy/tags.html" . }}{{ end }}
+    </li>
+    {{ end }}
+  </ul>
+  {{ partial "pagination.html" . }}
+</section>
+{{ end }}
