@@ -12,8 +12,10 @@
     {{ range .Paginator.Pages }}
     <li>
       <span class="date">{{ .Date | time.Format $dateFormat }}</span>
-      <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
-      <span class="link-tags">{{ range .GetTerms "tags" }}<a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a> {{ end }}</span>
+      <div class="title-group">
+        <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
+        {{ with .GetTerms "tags" }}<span class="link-tags">{{ range . }}<a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>{{ end }}</span>{{ end }}
+      </div>
     </li>
     {{ end }}
   </ul>

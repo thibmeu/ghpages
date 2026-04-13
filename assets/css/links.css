@@ -1,29 +1,38 @@
-/* Grid layout for link list items: date | title | tags */
-@media only screen and (min-width: 768.1px) {
+@media only screen and (min-width: 769px) {
   .list ul:not(.pagination) li {
     display: grid;
-    grid-template-columns: 20rem 1fr 16rem;
-    align-items: baseline;
+    grid-template-columns: 20rem 1fr;
+    align-items: start;
     column-gap: 1.5rem;
+    padding-bottom: 0.8rem;
   }
 
   .list ul:not(.pagination) li .date {
     margin-right: 0;
+    padding-top: 0.2rem;
   }
 }
 
-/* #tag styling — same weight as date, no decoration */
+.title-group {
+  display: flex;
+  flex-direction: column;
+}
+
 .link-tags {
+  font-size: 1.4rem;
+  line-height: 1;
   font-weight: 400;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  opacity: 0.6;
 }
 
 .link-tags a {
   color: inherit;
   text-decoration: none;
-  margin-right: 0.4rem;
+  margin-right: 0.6rem;
+}
+
+.link-tags:hover {
+  opacity: 1;
 }
 
 .link-tags a:hover {
