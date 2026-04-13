@@ -19,7 +19,7 @@ pygmentscodefencesguesssyntax = true
     info = "I talk to computers to make them work"
     description = "Thibault Meunier's personal website"
     keywords = "blog,developer,personal"
-    custom_css = ["css/links.css"]
+    customCSS = ["css/links.css"]
 
     hidecredits = false
     hidecopyright = true

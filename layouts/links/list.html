@@ -13,7 +13,7 @@
     <li>
       <span class="date">{{ .Date | time.Format $dateFormat }}</span>
       <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
-      {{ with .GetTerms "tags" }}{{ partial "taxonomy/tags.html" . }}{{ end }}
+      <span class="link-tags">{{ range .GetTerms "tags" }}<a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a> {{ end }}</span>
     </li>
     {{ end }}
   </ul>
