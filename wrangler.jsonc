@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "ghpages",
+  "compatibility_date": "2026-04-17",
+  "assets": {
+    "directory": "./public"
+  },
+  "routes": [
+    { "pattern": "thibaultmeunier.com/*", "zone_name": "thibaultmeunier.com" },
+    { "pattern": "thibmeu.com/*", "zone_name": "thibmeu.com" },
+    { "pattern": "thibault.uk/*", "zone_name": "thibault.uk" }
+  ]
+}
