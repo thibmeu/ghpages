@@ -1,13 +1,13 @@
 {{ define "title" }}{{ .Title }} · {{ .Site.Title }}{{ end }}
 {{ define "content" }}
 <section class="container list">
-  <header class="links-header">
+  <header>
     <h1 class="title">
       <a class="title-link" href="{{ .Permalink | safeURL }}">{{ .Title }}</a>
     </h1>
-    <input id="links-filter" class="links-filter" type="search" placeholder="Filter…" autocomplete="off" spellcheck="false" aria-label="Filter links">
   </header>
   {{ .Content }}
+  <input id="links-filter" class="links-filter" type="search" placeholder="Filter…" autocomplete="off" spellcheck="false" aria-label="Filter links">
   {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006" }}
   <ul id="links-list">
     {{ range .Pages }}
