@@ -5,7 +5,7 @@
     <h1 class="title">
       <a class="title-link" href="{{ .Permalink | safeURL }}">{{ .Title }}</a>
     </h1>
-    <input id="links-filter" class="links-filter" type="search" placeholder="Filter…" autocomplete="off" spellcheck="false">
+    <input id="links-filter" class="links-filter" type="search" placeholder="Filter…" autocomplete="off" spellcheck="false" aria-label="Filter links">
   </header>
   {{ .Content }}
   {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006" }}
@@ -28,6 +28,17 @@
       items.forEach(li => {
         li.hidden = q && !li.dataset.title.includes(q) && !li.dataset.tags.includes(q);
       });
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === '/' && document.activeElement !== filter && e.target.tagName !== 'INPUT') {
+        e.preventDefault();
+        filter.focus();
+      }
+      if (e.key === 'Escape' && document.activeElement === filter) {
+        filter.value = '';
+        filter.dispatchEvent(new Event('input'));
+        filter.blur();
+      }
     });
   </script>
 </section>

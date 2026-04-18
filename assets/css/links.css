@@ -39,6 +39,11 @@
   text-decoration: underline;
 }
 
+/* Ensure hidden attribute overrides desktop grid display */
+#links-list li[hidden] {
+  display: none;
+}
+
 /* Filter input */
 .links-header {
   display: flex;
@@ -46,22 +51,37 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 0;
 }
 
 .links-filter {
   font-size: 1.4rem;
   font-family: inherit;
-  padding: 0.3rem 0.6rem;
-  border: 1px solid currentColor;
-  border-radius: 4px;
+  padding: 0.2rem 0;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  border-radius: 0;
   background: transparent;
   color: inherit;
-  width: 14rem;
-  opacity: 0.5;
-  transition: opacity 0.15s;
+  width: 10rem;
+  opacity: 0.35;
+  transition: opacity 0.2s ease, width 0.25s ease;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .links-filter:focus {
   opacity: 1;
   outline: none;
+  width: 18rem;
+}
+
+.links-filter::placeholder {
+  color: currentColor;
+  opacity: 0.6;
+}
+
+/* suppress webkit search decorations but keep the × clear button */
+.links-filter::-webkit-search-decoration {
+  -webkit-appearance: none;
 }
