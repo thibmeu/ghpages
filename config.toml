@@ -1,4 +1,4 @@
-baseurl = "https://thibmeu.github.io/"
+baseurl = "https://thibault.uk/"
 title = "Thibault Meunier"
 theme = "hugo-coder"
 languagecode = "en"
@@ -8,7 +8,7 @@ paginate = 20
 
 [taxonomies]
   tag = "tags"
-canonifyurls = true
+canonifyurls = false
 
 pygmentsstyle = "monokai"
 pygmentscodefences = true
