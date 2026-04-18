@@ -1,7 +1,7 @@
 +++
 date = 2026-04-18T08:00:00Z
-title = "quicvarint"
-description = "Encoding variable length integer in TypeScript"
+title = "quicvarint: variable-length integers in TypeScript"
+description = "Encoding variable-length integers in TypeScript"
 slug = "" 
 tags = ["varint", "2msb", "cryptography", "typescript", "rfc-implementation"]
 categories = []
@@ -78,8 +78,14 @@ The binary literals match the table above: `0b0100_0000` is the 2-byte prefix, a
 
 Decoding reads the prefix, masks it off, and shifts the remaining bytes into the value. The `read` variant does the same from a `DataView` at an offset, useful when parsing a larger buffer.
 
+Testing for correctness was a bit challenging. RFC 9000 does provide only 4 examples in [Section A.1](https://www.rfc-editor.org/rfc/rfc9000.html#name-sample-variable-length-inte). For broader coverage, I've [imported](https://github.com/thibmeu/quicvarint/blob/2ca9a6a91df4e186e14905300b583f965e07fa7f/test/fixtures/vectors.json) tests from [quic-go](https://github.com/quic-go/quic-go/blob/306fc96d50087cd16998053e0b30abcc85146972/quicvarint/varint_test.go#L109-L120) implementation.
+
+# To use it
+
+The package is available on [npm](https://www.npmjs.com/package/quicvarint).
+
 ```bash
 npm install quicvarint
 ```
 
-Source on [GitHub](https://github.com/thibmeu/quicvarint).
+Source on GitHub [thibmeu/quicvarint](https://github.com/thibmeu/quicvarint).
