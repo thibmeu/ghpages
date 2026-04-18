@@ -63,6 +63,13 @@
   appearance: none;
 }
 
+@media only screen and (min-width: 769px) {
+  .links-filter {
+    margin-left: calc(20rem + 1.5rem);
+    width: calc(100% - 20rem - 1.5rem);
+  }
+}
+
 .links-filter:focus {
   opacity: 1;
   outline: none;
