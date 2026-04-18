@@ -7,6 +7,24 @@
     </h1>
   </header>
   {{ .Content }}
+  {{ if not hugo.IsServer }}
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+  <div id="links-search" class="links-search"></div>
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <script>
+    new PagefindUI({
+      element: "#links-search",
+      showSubResults: false,
+      showImages: false,
+      resetStyles: false,
+      excerptLength: 0,
+      translations: {
+        placeholder: "Search links…",
+        zero_results: "No links found for [SEARCH_TERM]"
+      }
+    });
+  </script>
+  {{ end }}
   {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006" }}
   <ul>
     {{ range .Paginator.Pages }}

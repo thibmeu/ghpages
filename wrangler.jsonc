@@ -1,6 +1,9 @@
 {
   "$schema": "https://unpkg.com/wrangler/config-schema.json",
   "name": "ghpages",
+  "build": {
+    "command": "hugo && npx pagefind --site public"
+  },
   "compatibility_date": "2026-04-17",
   "assets": {
     "directory": "./public"
