@@ -1,16 +1,15 @@
 {{ define "title" }}{{ .Title }} · {{ .Site.Title }}{{ end }}
 {{ define "content" }}
 <section class="container page">
-  <article data-pagefind-body>
-    <a href="{{ .Params.externalLink | default .RelPermalink }}"
-       data-pagefind-meta="url"
-       style="display:none"
-       aria-hidden="true"></a>
+  <article>
     <header>
       <h1 class="title">{{ .Title }}</h1>
     </header>
+    {{ with .Params.externalLink }}
+    <p><a href="{{ . }}">{{ . }}</a></p>
+    {{ end }}
     {{ with .GetTerms "tags" }}
-    <p class="link-tags">{{ range . }}#{{ .LinkTitle }} {{ end }}</p>
+    <p class="link-tags">{{ range . }}<a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a> {{ end }}</p>
     {{ end }}
   </article>
 </section>

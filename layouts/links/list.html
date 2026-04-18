@@ -1,34 +1,17 @@
 {{ define "title" }}{{ .Title }} · {{ .Site.Title }}{{ end }}
 {{ define "content" }}
 <section class="container list">
-  <header>
+  <header class="links-header">
     <h1 class="title">
       <a class="title-link" href="{{ .Permalink | safeURL }}">{{ .Title }}</a>
     </h1>
+    <input id="links-filter" class="links-filter" type="search" placeholder="Filter…" autocomplete="off" spellcheck="false">
   </header>
   {{ .Content }}
-  {{ if not hugo.IsServer }}
-  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-  <div id="links-search" class="links-search"></div>
-  <script src="/pagefind/pagefind-ui.js"></script>
-  <script>
-    new PagefindUI({
-      element: "#links-search",
-      showSubResults: false,
-      showImages: false,
-      resetStyles: false,
-      excerptLength: 0,
-      translations: {
-        placeholder: "Search links…",
-        zero_results: "No links found for [SEARCH_TERM]"
-      }
-    });
-  </script>
-  {{ end }}
   {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006" }}
-  <ul>
-    {{ range .Paginator.Pages }}
-    <li>
+  <ul id="links-list">
+    {{ range .Pages }}
+    <li data-title="{{ .Title | lower }}" data-tags="{{ range .GetTerms "tags" }}{{ .LinkTitle }} {{ end }}">
       <span class="date">{{ .Date | time.Format $dateFormat }}</span>
       <div class="title-group">
         <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
@@ -37,6 +20,15 @@
     </li>
     {{ end }}
   </ul>
-  {{ partial "pagination.html" . }}
+  <script>
+    const filter = document.getElementById('links-filter');
+    const items = document.querySelectorAll('#links-list li');
+    filter.addEventListener('input', () => {
+      const q = filter.value.toLowerCase();
+      items.forEach(li => {
+        li.hidden = q && !li.dataset.title.includes(q) && !li.dataset.tags.includes(q);
+      });
+    });
+  </script>
 </section>
 {{ end }}

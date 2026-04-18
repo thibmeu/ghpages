@@ -39,37 +39,29 @@
   text-decoration: underline;
 }
 
-/* Pagefind search widget */
-.links-search {
-  margin-bottom: 2.4rem;
+/* Filter input */
+.links-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-:root {
-  --pagefind-ui-scale: 0.8;
-  --pagefind-ui-border-width: 1px;
-  --pagefind-ui-border-radius: 4px;
-  --pagefind-ui-font: inherit;
+.links-filter {
+  font-size: 1.4rem;
+  font-family: inherit;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  width: 14rem;
+  opacity: 0.5;
+  transition: opacity 0.15s;
 }
 
-.pagefind-ui__search-input {
-  font-size: 1.6rem;
-}
-
-.pagefind-ui__result {
-  padding: 0.6rem 0;
-  border: none;
-  border-bottom: 1px solid currentColor;
-  opacity: 0.8;
-}
-
-.pagefind-ui__result:hover {
+.links-filter:focus {
   opacity: 1;
-}
-
-.pagefind-ui__result-title {
-  font-size: 1.6rem;
-}
-
-.pagefind-ui__result-excerpt {
-  display: none;
+  outline: none;
 }
