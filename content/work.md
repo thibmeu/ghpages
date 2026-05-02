@@ -20,6 +20,7 @@ More on the [IETF Datatracker](https://datatracker.ietf.org/doc/search/?name=meu
 
 ## Cloudflare
 
+* [Moving past bots vs. humans](https://blog.cloudflare.com/past-bots-and-humans/) (2026)
 * [Forget IPs: using cryptography to verify bot and agent traffic](https://blog.cloudflare.com/web-bot-auth/) (2025)
 * [Beyond IP lists: a registry format for bots and agents](https://blog.cloudflare.com/agent-registry/) (2025)
 * [Anonymous credentials: rate-limiting bots and agents without compromising privacy](https://blog.cloudflare.com/private-rate-limiting/) (2025)
