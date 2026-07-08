@@ -10,13 +10,16 @@ At Cloudflare I work on Privacy Pass and bot authentication. At the IETF, I writ
 
 I chair the [Open Cloud Mesh (OCM)](https://datatracker.ietf.org/wg/ocm/about/) working group, standardising federated file sharing across organisations.
 
-* [HTTP Message Signatures for Automated Traffic Architecture](https://datatracker.ietf.org/doc/draft-meunier-web-bot-auth-architecture/) — draft-meunier-web-bot-auth-architecture
+* [HTTP Message Signatures for Automated Traffic](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-protocol/) — draft-meunier-webbotauth-httpsig-protocol
+* [HTTP Message Signatures Directory](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-directory/) — draft-meunier-webbotauth-httpsig-directory
 * [Registry and Signature Agent Card for Web Bot Auth](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-registry/) — draft-meunier-webbotauth-registry
-* [HTTP Message Signatures Directory](https://datatracker.ietf.org/doc/draft-meunier-http-message-signatures-directory/) — draft-meunier-http-message-signatures-directory
-* [Batched Token Issuance Protocol](https://datatracker.ietf.org/doc/draft-ietf-privacypass-batched-tokens/) — draft-ietf-privacypass-batched-tokens (WG Last Call)
+* [Moderation of unLinkable Endorsements (MoLE) Architecture](https://datatracker.ietf.org/doc/draft-jms-mole-architecture/) - draft-jms-mole-architecture
+* [MoLE HTTP Transport](https://datatracker.ietf.org/doc/draft-jms-mole-http-transport/) - draft-jms-mole-http-transport
+* [MoLE Protocols](https://datatracker.ietf.org/doc/draft-jms-mole-protocols/) - draft-jms-mole-protocols
+* [Batched Token Issuance Protocol](https://datatracker.ietf.org/doc/draft-ietf-privacypass-batched-tokens/) — draft-ietf-privacypass-batched-tokens (Submitted for Publication)
 * [Privacy Pass Reverse Flow](https://datatracker.ietf.org/doc/draft-meunier-privacypass-reverse-flow/) — draft-meunier-privacypass-reverse-flow
 
-More on the [IETF Datatracker](https://datatracker.ietf.org/doc/search/?name=meunier&activedrafts=on&olddrafts=on).
+More on the [IETF Datatracker](https://datatracker.ietf.org/person/ot-ietf@thibault.uk).
 
 ## Cloudflare
 
