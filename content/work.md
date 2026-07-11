@@ -8,7 +8,7 @@ At Cloudflare I work on Privacy Pass and bot authentication. At the IETF, I writ
 
 ## IETF
 
-I chair the [Open Cloud Mesh (OCM)](https://datatracker.ietf.org/wg/ocm/about/) working group, standardising federated file sharing across organisations.
+I chair the [Open Cloud Mesh (OCM)](https://datatracker.ietf.org/wg/ocm/about/) working group, standardising federated file sharing across organisations. At the W3C, I co-chaired [PACT](https://pactworkshop.com/), the workshop on private access control.
 
 * [HTTP Message Signatures for Automated Traffic](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-protocol/) — draft-meunier-webbotauth-httpsig-protocol
 * [HTTP Message Signatures Directory](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-directory/) — draft-meunier-webbotauth-httpsig-directory

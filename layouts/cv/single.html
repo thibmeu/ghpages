@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ .Title }} — CV</title>
+<style>
+@page { size: A4; margin: 13mm 18mm; }
+html { font-size: 10.2pt; }
+body {
+  font-family: Charter, "Bitstream Charter", Georgia, "Times New Roman", serif;
+  color: #1a1a1a;
+  line-height: 1.45;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+h1 { font-size: 1.9rem; font-weight: 600; margin: 0; letter-spacing: 0.01em; }
+h1 + p { margin-top: 0.2rem; color: #555; } /* contact line */
+h2 {
+  font-size: 0.95rem;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.15rem;
+  margin: 0.9rem 0 0.4rem;
+}
+p { margin: 0.35rem 0; }
+ul { margin: 0.25rem 0 0.5rem; padding-left: 1.2rem; }
+li { margin: 0.15rem 0; }
+a { color: #1a1a1a; text-decoration: none; }
+a:hover { text-decoration: underline; }
+em { color: #444; }
+@media screen { body { padding: 2rem 1rem; } a { color: #205a9e; } }
+</style>
+</head>
+<body>
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+</body>
+</html>
