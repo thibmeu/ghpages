@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Publish a link</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/images/icon.svg" type="image/svg+xml">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #fff; --fg: #212121; --muted: #757575;
+    --line: #dcdcdc; --accent: #1d1e20; --accent-fg: #fff;
+    --ok: #1a7f37; --err: #b3261e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #212121; --fg: #dadada; --muted: #9a9a9a;
+      --line: #3a3a3a; --accent: #dadada; --accent-fg: #212121;
+      --ok: #4ac26b; --err: #ff7b72;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2rem 1.25rem; background: var(--bg); color: var(--fg);
+    font: 1rem/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex; justify-content: center;
+  }
+  main { width: 100%; max-width: 34rem; }
+  h1 { font-size: 1.25rem; margin: 0 0 1.5rem; font-weight: 600; }
+  h1 a { color: var(--muted); text-decoration: none; font-weight: 400; }
+  label { display: block; font-size: .8rem; color: var(--muted); margin-bottom: .4rem; }
+  input {
+    width: 100%; padding: .8rem; font: inherit; font-size: 1rem;
+    background: var(--bg); color: var(--fg);
+    border: 1px solid var(--line); border-radius: .5rem;
+  }
+  input:focus-visible { outline: 2px solid var(--fg); outline-offset: 1px; }
+  button {
+    width: 100%; margin-top: 1rem; padding: .9rem; font: inherit; font-weight: 600;
+    background: var(--accent); color: var(--accent-fg);
+    border: 0; border-radius: .5rem; cursor: pointer;
+  }
+  button:disabled { opacity: .5; cursor: default; }
+  details { margin-top: 2.5rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+  summary { font-size: .85rem; color: var(--muted); cursor: pointer; }
+  details > div { margin-top: 1rem; }
+  details button { background: none; color: var(--fg); border: 1px solid var(--line); }
+  #status { margin-top: 1rem; font-size: .9rem; min-height: 1.6em; overflow-wrap: anywhere; }
+  #status a { color: inherit; }
+  .ok { color: var(--ok); } .err { color: var(--err); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Publish a link <a href="/links/">← all links</a></h1>
+
+  <form id="publish">
+    <label for="url">URL</label>
+    <input id="url" name="url" type="url" inputmode="url" required
+           placeholder="https://" autocomplete="off" autocapitalize="off" spellcheck="false">
+    <button type="submit">Publish</button>
+  </form>
+
+  <p id="status" role="status" aria-live="polite"></p>
+
+  <details>
+    <summary>Enrol this device</summary>
+    <div>
+      <label for="enrol">Enrolment secret</label>
+      <input id="enrol" type="password" autocomplete="off">
+      <button id="enrol-btn" type="button">Create passkey</button>
+    </div>
+  </details>
+</main>
+
+<script>
+const RP_ID = "thibault.uk";
+const $ = (id) => document.getElementById(id);
+const status = $("status");
+
+const say = (msg, cls = "") => { status.className = cls; status.innerHTML = msg; };
+
+const b64u = (buf) =>
+  btoa(String.fromCharCode(...new Uint8Array(buf)))
+    .replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+
+const challenge = async () => {
+  const res = await fetch("/hooks/challenge");
+  if (!res.ok) throw new Error("could not get a challenge");
+  return new TextEncoder().encode(await res.text());
+};
+
+const post = async (path, body) => {
+  const res = await fetch(path, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res;
+};
+
+// Share targets are inconsistent: Android often drops the URL into `text`.
+const params = new URLSearchParams(location.search);
+const shared = params.get("url") || params.get("text") || "";
+$("url").value = (shared.match(/https?:\/\/\S+/) || [shared])[0];
+
+$("publish").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector("button");
+  const url = $("url").value.trim();
+  btn.disabled = true;
+  say("Waiting for passkey…");
+  try {
+    const cred = await navigator.credentials.get({
+      publicKey: {
+        challenge: await challenge(),
+        rpId: RP_ID,
+        userVerification: "preferred",
+      },
+    });
+    say("Fetching page and tagging…");
+    const res = await post("/hooks/publish", {
+      url,
+      credentialId: b64u(cred.rawId),
+      clientDataJSON: b64u(cred.response.clientDataJSON),
+      authenticatorData: b64u(cred.response.authenticatorData),
+      signature: b64u(cred.response.signature),
+    });
+    const { title, tags } = await res.json();
+    say(`Published <strong>${title}</strong>${tags.length ? ` — ${tags.join(", ")}` : ""}`, "ok");
+    $("url").value = "";
+  } catch (err) {
+    say(err.message || String(err), "err");
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+$("enrol-btn").addEventListener("click", async () => {
+  say("Creating passkey…");
+  try {
+    const cred = await navigator.credentials.create({
+      publicKey: {
+        challenge: await challenge(),
+        rp: { id: RP_ID, name: "thibault.uk" },
+        // Stable user id so re-enrolling replaces the passkey instead of piling up.
+        user: {
+          id: new TextEncoder().encode("thibmeu"),
+          name: "thibmeu",
+          displayName: "Thibault Meunier",
+        },
+        pubKeyCredParams: [{ type: "public-key", alg: -7 }], // ES256 only
+        // Discoverable, so publishing never has to name a credential up front.
+        authenticatorSelection: {
+          residentKey: "required",
+          userVerification: "preferred",
+        },
+      },
+    });
+    const publicKey = cred.response.getPublicKey();
+    if (!publicKey) throw new Error("authenticator returned no ES256 key");
+    await post("/hooks/passkey/register", {
+      enrol: $("enrol").value,
+      credentialId: b64u(cred.rawId),
+      publicKey: b64u(publicKey),
+      clientDataJSON: b64u(cred.response.clientDataJSON),
+    });
+    $("enrol").value = "";
+    say("Device enrolled. You can publish now.", "ok");
+  } catch (err) {
+    say(err.message || String(err), "err");
+  }
+});
+</script>
+</body>
+</html>
