@@ -47,6 +47,7 @@
   summary { font-size: .85rem; color: var(--muted); cursor: pointer; }
   details > div { margin-top: 1rem; }
   details button { background: none; color: var(--fg); border: 1px solid var(--line); }
+  #notify-state { margin: 0 0 .75rem; font-size: .85rem; color: var(--muted); }
   #status { margin-top: 1rem; font-size: .9rem; min-height: 1.6em; overflow-wrap: anywhere; }
   #status a { color: inherit; }
   .ok { color: var(--ok); } .err { color: var(--err); }
@@ -64,6 +65,14 @@
   </form>
 
   <p id="status" role="status" aria-live="polite"></p>
+
+  <details id="notify-box">
+    <summary>Notifications</summary>
+    <div>
+      <p id="notify-state">Get commits and builds as system notifications.</p>
+      <button id="notify-btn" type="button">Enable notifications</button>
+    </div>
+  </details>
 
   <details>
     <summary>Enrol this device</summary>
@@ -86,10 +95,33 @@ const b64u = (buf) =>
   btoa(String.fromCharCode(...new Uint8Array(buf)))
     .replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 
+const unb64u = (s) =>
+  Uint8Array.from(
+    atob(s.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(s.length / 4) * 4, "=")),
+    (c) => c.charCodeAt(0)
+  );
+
 const challenge = async () => {
   const res = await fetch("/hooks/challenge");
   if (!res.ok) throw new Error("could not get a challenge");
   return new TextEncoder().encode(await res.text());
+};
+
+// One passkey assertion, reused by publishing and by subscribing to push.
+const assert = async () => {
+  const cred = await navigator.credentials.get({
+    publicKey: {
+      challenge: await challenge(),
+      rpId: RP_ID,
+      userVerification: "preferred",
+    },
+  });
+  return {
+    credentialId: b64u(cred.rawId),
+    clientDataJSON: b64u(cred.response.clientDataJSON),
+    authenticatorData: b64u(cred.response.authenticatorData),
+    signature: b64u(cred.response.signature),
+  };
 };
 
 const post = async (path, body) => {
@@ -114,21 +146,9 @@ $("publish").addEventListener("submit", async (e) => {
   btn.disabled = true;
   say("Waiting for passkey…");
   try {
-    const cred = await navigator.credentials.get({
-      publicKey: {
-        challenge: await challenge(),
-        rpId: RP_ID,
-        userVerification: "preferred",
-      },
-    });
+    const assertion = await assert();
     say("Fetching page and tagging…");
-    const res = await post("/hooks/publish", {
-      url,
-      credentialId: b64u(cred.rawId),
-      clientDataJSON: b64u(cred.response.clientDataJSON),
-      authenticatorData: b64u(cred.response.authenticatorData),
-      signature: b64u(cred.response.signature),
-    });
+    const res = await post("/hooks/publish", { url, ...assertion });
     const { title, tags } = await res.json();
     say(`Published <strong>${title}</strong>${tags.length ? ` — ${tags.join(", ")}` : ""}`, "ok");
     $("url").value = "";
@@ -172,6 +192,64 @@ $("enrol-btn").addEventListener("click", async () => {
     say("Device enrolled. You can publish now.", "ok");
   } catch (err) {
     say(err.message || String(err), "err");
+  }
+});
+const VAPID_PUBLIC = "BNi7RTi3DuGMsvM3HMJw57Pvbtdjqal6tv6xqI0X_qltKpq7VP97xvG-kWymrSYAShm0p4Zdc3AXsAxxd2e2rm4";
+
+const notifyState = $("notify-state");
+const notifyBtn = $("notify-btn");
+
+const supported = "serviceWorker" in navigator && "PushManager" in window;
+if (!supported) {
+  notifyState.textContent = "This browser does not support Web Push.";
+  notifyBtn.disabled = true;
+} else if (Notification.permission === "denied") {
+  notifyState.textContent = "Notifications are blocked in your browser settings.";
+  notifyBtn.disabled = true;
+} else {
+  navigator.serviceWorker.register("/sw.js").then(async (reg) => {
+    if (await reg.pushManager.getSubscription()) {
+      notifyState.textContent = "Notifications are on for this device.";
+      notifyBtn.textContent = "Re-subscribe";
+    }
+  }).catch(() => {});
+}
+
+notifyBtn.addEventListener("click", async () => {
+  notifyBtn.disabled = true;
+  say("Enabling notifications…");
+  try {
+    const reg = await navigator.serviceWorker.register("/sw.js");
+    await navigator.serviceWorker.ready;
+
+    // Must happen inside this click; browsers ignore permission requests otherwise.
+    if (await Notification.requestPermission() !== "granted") {
+      throw new Error("notification permission not granted");
+    }
+
+    // An existing subscription may predate the current VAPID key, so replace it.
+    const existing = await reg.pushManager.getSubscription();
+    if (existing) await existing.unsubscribe();
+
+    const sub = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: unb64u(VAPID_PUBLIC),
+    });
+    const { endpoint, keys } = sub.toJSON();
+
+    say("Confirming with your passkey…");
+    await post("/hooks/push/subscribe", {
+      subscription: { endpoint, p256dh: keys.p256dh, auth: keys.auth },
+      ...(await assert()),
+    });
+
+    notifyState.textContent = "Notifications are on for this device.";
+    notifyBtn.textContent = "Re-subscribe";
+    say("Notifications enabled — you should get a test one now.", "ok");
+  } catch (err) {
+    say(err.message || String(err), "err");
+  } finally {
+    notifyBtn.disabled = false;
   }
 });
 </script>
