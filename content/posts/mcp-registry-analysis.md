@@ -1,9 +1,13 @@
 +++
 title = "Probing the MCP registry for anonymous access"
 date = 2026-09-01T12:00:00+02:00
-draft = true
+draft = false
 layout = "mcp-registry"
 tags = ["mcp", "oauth", "open web"]
+
+[build]
+list = "never"
+render = "always"
 +++
 
 The Model Context Protocol, or MCP for short, is ["an open-source standard for connecting AI applications to external systems"](https://modelcontextprotocol.io/docs/getting-started/intro).
