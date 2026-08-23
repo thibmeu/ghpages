@@ -1,0 +1,631 @@
+/* Chart tokens for the MCP registry post.
+ *
+ * hugo-coder compiles SCSS to fixed values and switches theme with a class on
+ * <body>, so there are no theme custom properties to inherit. These mirror the
+ * theme's own three-state pattern exactly:
+ *
+ *   body.colorscheme-light            -> light  (also the default)
+ *   body.colorscheme-dark             -> dark
+ *   body.colorscheme-auto + media     -> dark   <- the state that ships broken
+ *
+ * Palette validated against THIS theme's surfaces (#fafafa / #212121), not the
+ * reference ones. Light mode: aqua and yellow sit below 3:1, so every mark
+ * carries a visible direct label -- that relief is required, not decorative.
+ */
+
+.mcp-viz {
+  --viz-surface: #fafafa;
+  --viz-ink: #212121;
+  --viz-ink-muted: #5c5c5c;
+  --viz-grid: #e0e0e0;
+
+  /* categorical, fixed order -- never cycled, never reassigned by rank */
+  --viz-s1: #2a78d6;
+  --viz-s2: #eb6834;
+  --viz-s3: #1baf7a;
+  --viz-s4: #eda100;
+
+  /* sequential, one hue, low -> high magnitude */
+  --viz-seq-1: #cde2fb;
+  --viz-seq-2: #9ec5f4;
+  --viz-seq-3: #5598e7;
+  --viz-seq-4: #256abf;
+  --viz-seq-5: #104281;
+
+  --viz-accent: #d03b3b;
+}
+
+/* Dark steps are selected for the dark surface, not flipped from light. */
+body.colorscheme-dark .mcp-viz {
+  --viz-surface: #212121;
+  --viz-ink: #dadada;
+  --viz-ink-muted: #a5a5a5;
+  --viz-grid: #424242;
+
+  --viz-s1: #3987e5;
+  --viz-s2: #d95926;
+  --viz-s3: #199e70;
+  --viz-s4: #c98500;
+
+  --viz-seq-1: #184f95;
+  --viz-seq-2: #256abf;
+  --viz-seq-3: #3987e5;
+  --viz-seq-4: #86b6ef;
+  --viz-seq-5: #cde2fb;
+
+  --viz-accent: #e66767;
+}
+
+@media (prefers-color-scheme: dark) {
+  body.colorscheme-auto .mcp-viz {
+    --viz-surface: #212121;
+    --viz-ink: #dadada;
+    --viz-ink-muted: #a5a5a5;
+    --viz-grid: #424242;
+
+    --viz-s1: #3987e5;
+    --viz-s2: #d95926;
+    --viz-s3: #199e70;
+    --viz-s4: #c98500;
+
+    --viz-seq-1: #184f95;
+    --viz-seq-2: #256abf;
+    --viz-seq-3: #3987e5;
+    --viz-seq-4: #86b6ef;
+    --viz-seq-5: #cde2fb;
+
+    --viz-accent: #e66767;
+  }
+}
+
+/* ---- figure shell ---------------------------------------------------- */
+
+.mcp-chart {
+  margin: 2rem 0;
+  /* Wide panels scroll inside their own box; the page body never scrolls. */
+  overflow-x: auto;
+}
+
+.mcp-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.mcp-chart figcaption {
+  margin-top: 0.6rem;
+  font-size: 1.6rem;
+  line-height: inherit;
+  color: var(--viz-ink-muted);
+}
+
+.mcp-chart--journey .mcp-chart__unit {
+  margin-top: 0.8rem;
+  color: var(--viz-ink);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* ---- marks ----------------------------------------------------------- */
+
+/* 2px surface gap between adjacent fills, so segments read as separate marks
+   without a stroke colour of their own. */
+.mcp-viz .bar {
+  stroke: var(--viz-surface);
+  stroke-width: 2;
+  rx: 2;
+}
+
+.mcp-viz .bar-1 { fill: var(--viz-s1); }
+.mcp-viz .bar-2 { fill: var(--viz-s2); }
+.mcp-viz .bar-3 { fill: var(--viz-s3); }
+.mcp-viz .bar-4 { fill: var(--viz-s4); }
+.mcp-viz .bar-accent { fill: var(--viz-accent); }
+
+.mcp-viz .seq-1 { fill: var(--viz-seq-1); }
+.mcp-viz .seq-2 { fill: var(--viz-seq-2); }
+.mcp-viz .seq-3 { fill: var(--viz-seq-3); }
+.mcp-viz .seq-4 { fill: var(--viz-seq-4); }
+.mcp-viz .seq-5 { fill: var(--viz-seq-5); }
+
+/* Text wears ink tokens, never the series colour. */
+.mcp-viz .label {
+  fill: var(--viz-ink);
+  font-size: 17px;
+  font-family: inherit;
+}
+
+.mcp-viz .label-muted {
+  fill: var(--viz-ink-muted);
+  font-size: 15px;
+  font-family: inherit;
+}
+
+/* Required relief for the sub-3:1 light-mode slots: values sit on every mark. */
+.mcp-viz .value {
+  fill: var(--viz-ink);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  font-family: inherit;
+}
+
+.mcp-viz .axis {
+  stroke: var(--viz-grid);
+  stroke-width: 1;
+}
+
+.mcp-viz .rule {
+  stroke: var(--viz-grid);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+
+/* ---- legend ---------------------------------------------------------- */
+
+.mcp-viz .viz-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin: 0 0 0.7rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--viz-ink-muted);
+}
+
+.mcp-viz .viz-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.mcp-viz .viz-legend .swatch {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 2px;
+  flex: none;
+}
+
+/* ---- scroll reveal (gate-depth ladder only) -------------------------- */
+
+/* Scoped to figures the shortcode marked `reveal`, because render.py puts
+   class="step" on every panel's marks -- an unscoped rule would dim all of them.
+   Default is visible: with JS off, or before the observer runs, nothing is
+   hidden. Script only ever ADDS js-reveal and shown, so no-JS degrades to a
+   plain static chart rather than an invisible one. */
+.mcp-chart.reveal .step {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.mcp-chart.reveal.js-reveal .step {
+  opacity: 0.25;
+  transform: translateY(4px);
+}
+
+.mcp-chart.reveal.js-reveal .step.shown {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mcp-chart.reveal .step,
+  .mcp-chart.reveal.js-reveal .step {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---- editorial access journey --------------------------------------- */
+
+.mcp-viz {
+  --story-open: oklch(56% 0.13 155);
+  --story-auth: oklch(58% 0.16 52);
+  --story-optional: oklch(55% 0.10 245);
+  --story-broken: oklch(57% 0.018 250);
+  --story-pay: oklch(52% 0.16 25);
+  --story-paper: oklch(98% 0.006 75);
+}
+
+.post-content.mcp-viz {
+  display: block;
+}
+
+.post article,
+.mcp-chart {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body.colorscheme-dark .mcp-viz {
+  --story-open: oklch(70% 0.12 155);
+  --story-auth: oklch(72% 0.13 58);
+  --story-optional: oklch(70% 0.09 245);
+  --story-broken: oklch(63% 0.018 250);
+  --story-pay: oklch(67% 0.15 25);
+  --story-paper: oklch(21% 0.008 75);
+}
+
+@media (prefers-color-scheme: dark) {
+  body.colorscheme-auto .mcp-viz {
+    --story-open: oklch(70% 0.12 155);
+    --story-auth: oklch(72% 0.13 58);
+    --story-optional: oklch(70% 0.09 245);
+    --story-broken: oklch(63% 0.018 250);
+    --story-pay: oklch(67% 0.15 25);
+    --story-paper: oklch(21% 0.008 75);
+  }
+}
+
+.mcp-viz > p,
+.mcp-viz > h2,
+.mcp-viz > hr {
+  max-width: none;
+}
+
+.mcp-viz h2 {
+  margin-top: clamp(3.5rem, 8vw, 7rem);
+}
+
+.mcp-viz .method-note {
+  max-width: 45rem;
+  margin: 4rem auto;
+  padding-block: 1.25rem;
+  border-block: 1px solid var(--viz-grid);
+  color: var(--viz-ink-muted);
+  font-size: 0.95rem;
+}
+
+.access-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+  margin: clamp(4rem, 10vw, 8rem) 0;
+  min-width: 0;
+}
+
+.access-story__visual,
+.access-story__steps,
+.access-story__step {
+  min-width: 0;
+}
+
+.access-story__visual {
+  align-self: start;
+}
+
+.mcp-chart--journey {
+  margin: 0;
+}
+
+.mcp-chart--journey svg {
+  min-width: 0;
+}
+
+.mcp-chart--journey-mobile {
+  display: none;
+}
+
+.access-story__mobile-snapshot {
+  display: none;
+}
+
+.access-story__mobile-outcomes {
+  display: none;
+}
+
+.mcp-viz > .mcp-chart:not(.mcp-chart--journey) {
+  max-width: 100%;
+}
+
+.access-story__steps {
+  display: grid;
+  gap: 35vh;
+}
+
+.access-story__step {
+  max-width: 34rem;
+  min-height: 35vh;
+  padding-block: 1.5rem;
+  opacity: 0.42;
+  transition: opacity 250ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.access-story__step h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.55rem, 3vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.access-story__step p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.access-story[data-step="0"] [data-story-step="0"],
+.access-story[data-step="1"] [data-story-step="1"],
+.access-story[data-step="2"] [data-story-step="2"],
+.access-story[data-step="3"] [data-story-step="3"],
+.access-story[data-step="4"] [data-story-step="4"] {
+  opacity: 1;
+}
+
+.mcp-viz .endpoint {
+  fill: var(--viz-grid);
+  transform: translate(var(--dx), var(--dy));
+  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+              fill 250ms cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 250ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.mcp-viz .threshold {
+  stroke: var(--viz-grid);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+}
+
+.mcp-viz .eyebrow,
+.mcp-viz .footnote {
+  fill: var(--viz-ink-muted);
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+
+.mcp-viz .outcome-value {
+  fill: var(--viz-ink);
+  font-family: inherit;
+  font-size: 36px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.mcp-viz .client-mark {
+  fill: none;
+  stroke: var(--viz-ink);
+  stroke-width: 2;
+}
+
+.mcp-chart--journey-desktop .label {
+  font-size: 19px;
+}
+
+.mcp-chart--journey-desktop .label-muted {
+  font-size: 16px;
+}
+
+.access-story.js-story[data-step="0"] .endpoint {
+  transform: none;
+}
+
+.access-story.js-story[data-step="0"] .journey-guides,
+.access-story.js-story[data-step="0"] .journey-labels {
+  opacity: 0;
+}
+
+.access-story.js-story .journey-guides,
+.access-story.js-story .journey-labels {
+  transition: opacity 300ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.access-story.js-story .outcome {
+  opacity: 0.22;
+  transition: opacity 250ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.access-story[data-step="1"] .endpoint-broken,
+.access-story[data-step="2"] .endpoint-broken,
+.access-story[data-step="3"] .endpoint-broken,
+.access-story[data-step="4"] .endpoint-broken { fill: var(--story-broken); }
+
+.access-story[data-step="2"] .endpoint-required,
+.access-story[data-step="3"] .endpoint-required,
+.access-story[data-step="4"] .endpoint-required { fill: var(--story-auth); }
+
+.access-story[data-step="2"] .endpoint-paywalled,
+.access-story[data-step="3"] .endpoint-paywalled,
+.access-story[data-step="4"] .endpoint-paywalled { fill: var(--story-pay); }
+
+.access-story[data-step="3"] .endpoint-optional,
+.access-story[data-step="4"] .endpoint-optional { fill: var(--story-optional); }
+
+.access-story[data-step="4"] .endpoint-open { fill: var(--story-open); }
+
+.access-story[data-step="1"] .endpoint:not(.endpoint-broken),
+.access-story[data-step="2"] .endpoint:not(.endpoint-broken):not(.endpoint-required):not(.endpoint-paywalled),
+.access-story[data-step="3"] .endpoint:not(.endpoint-broken):not(.endpoint-required):not(.endpoint-paywalled):not(.endpoint-optional),
+.access-story[data-step="4"] .endpoint-partial,
+.access-story[data-step="4"] .endpoint-throttled {
+  opacity: 0.22;
+}
+
+.access-story[data-step="1"] .outcome-did-not-answer,
+.access-story[data-step="2"] .outcome-did-not-answer,
+.access-story[data-step="2"] .outcome-auth-required,
+.access-story[data-step="3"] .outcome-did-not-answer,
+.access-story[data-step="3"] .outcome-auth-required,
+.access-story[data-step="3"] .outcome-auth-advertised,
+.access-story[data-step="4"] .outcome {
+  opacity: 1;
+}
+
+@media (min-width: 64rem) {
+  .access-story {
+    width: min(92rem, calc(100vw - 2rem));
+    margin-left: 50%;
+    transform: translateX(-50%);
+    grid-template-columns: minmax(0, 2fr) minmax(20rem, 0.65fr);
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  .access-story__visual {
+    position: sticky;
+    top: 10vh;
+  }
+
+  .access-story__steps {
+    padding-block: 28vh;
+  }
+
+  .access-story__step {
+    min-height: 46vh;
+  }
+}
+
+@media (max-width: 63.99rem) {
+  .post-content.mcp-viz {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .access-story {
+    display: block;
+    margin-block: 4rem 6rem;
+  }
+
+  .access-story__visual {
+    display: block;
+  }
+
+  .mcp-chart--journey-desktop {
+    display: none;
+  }
+
+  .mcp-chart--journey-mobile {
+    display: block;
+    margin: 0;
+  }
+
+  .mcp-chart--journey-mobile svg {
+    width: auto;
+    max-width: 100%;
+    max-height: 32vh;
+    max-height: 32svh;
+    margin-inline: auto;
+  }
+
+  .access-story__mobile-outcomes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem 1.6rem;
+    margin: 0;
+    padding: 1.2rem 0 0;
+    border-top: 1px solid var(--viz-grid);
+    list-style: none;
+  }
+
+  .mobile-outcome {
+    display: grid;
+    grid-template-columns: 4.8rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0.8rem;
+    opacity: 0.22;
+    transition: opacity 250ms cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .mobile-outcome strong {
+    font-size: 2rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mobile-outcome span {
+    color: var(--viz-ink-muted);
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .mobile-outcome--broken strong { color: var(--story-broken); }
+  .mobile-outcome--required strong { color: var(--story-auth); }
+  .mobile-outcome--optional strong { color: var(--story-optional); }
+  .mobile-outcome--open strong { color: var(--story-open); }
+
+  .mcp-viz > .mcp-chart:not(.mcp-chart--journey) svg {
+    min-width: 52rem;
+  }
+
+  .access-story__steps {
+    gap: 4rem;
+  }
+
+  .access-story__step {
+    min-height: 0;
+  }
+
+  .access-story:not(.js-story) .access-story__step {
+    opacity: 1;
+  }
+
+  .access-story.js-story {
+    position: relative;
+    margin-block: 2rem 4rem;
+  }
+
+  .access-story.js-story .access-story__visual {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    height: 52vh;
+    height: 52svh;
+    padding-top: max(0.8rem, env(safe-area-inset-top));
+    background: var(--viz-surface);
+  }
+
+  .access-story.js-story .access-story__steps {
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+
+  .access-story.js-story .access-story__step {
+    position: sticky;
+    top: 52vh;
+    top: 52svh;
+    height: 48vh;
+    height: 48svh;
+    min-height: 48vh;
+    min-height: 48svh;
+    max-width: none;
+    padding: 2rem 0 1.6rem;
+    border-top: 1px solid var(--viz-grid);
+    background: var(--viz-surface);
+    opacity: 0;
+  }
+
+  .access-story.js-story .access-story__step h2 {
+    font-size: 2.2rem;
+  }
+
+  .access-story.js-story[data-step="0"] [data-story-step="0"],
+  .access-story.js-story[data-step="1"] [data-story-step="1"],
+  .access-story.js-story[data-step="2"] [data-story-step="2"],
+  .access-story.js-story[data-step="3"] [data-story-step="3"],
+  .access-story.js-story[data-step="4"] [data-story-step="4"] {
+    opacity: 1;
+  }
+
+  .access-story[data-step="1"] .mobile-outcome--broken,
+  .access-story[data-step="2"] .mobile-outcome--broken,
+  .access-story[data-step="2"] .mobile-outcome--required,
+  .access-story[data-step="3"] .mobile-outcome--broken,
+  .access-story[data-step="3"] .mobile-outcome--required,
+  .access-story[data-step="3"] .mobile-outcome--optional,
+  .access-story[data-step="4"] .mobile-outcome {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .access-story__step,
+  .mobile-outcome,
+  .mcp-viz .endpoint,
+  .access-story.js-story .outcome,
+  .access-story.js-story .journey-guides,
+  .access-story.js-story .journey-labels {
+    transition: none;
+  }
+}

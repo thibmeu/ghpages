@@ -1,0 +1,45 @@
+{{- $res := resources.Get "mcp/access_journey.svg" -}}
+{{- $mobile := resources.Get "mcp/access_journey_mobile.svg" -}}
+{{- if and $res $mobile -}}
+<section class="access-story" data-step="0" aria-label="Anonymous access through the MCP registry">
+  <div class="access-story__visual">
+    <figure class="mcp-chart mcp-chart--journey mcp-chart--journey-desktop">
+      {{ $res.Content | safeHTML }}
+      <figcaption class="mcp-chart__unit">One mark ≈ 1% of the 11,121 remote endpoints probed.</figcaption>
+    </figure>
+    <figure class="mcp-chart mcp-chart--journey mcp-chart--journey-mobile">
+      {{ $mobile.Content | safeHTML }}
+      <ol class="access-story__mobile-outcomes" aria-label="Anonymous access outcomes">
+        <li class="mobile-outcome mobile-outcome--broken"><strong>15%</strong><span>no answer</span></li>
+        <li class="mobile-outcome mobile-outcome--required"><strong>28%</strong><span>auth required</span></li>
+        <li class="mobile-outcome mobile-outcome--optional"><strong>23%</strong><span>auth advertised</span></li>
+        <li class="mobile-outcome mobile-outcome--open"><strong>31%</strong><span>simply open</span></li>
+      </ol>
+    </figure>
+  </div>
+  <div class="access-story__steps">
+    <section class="access-story__step" id="access-test" data-story-step="0">
+      <h2>Start without an identity.</h2>
+      <p>For each listed remote endpoint, send only the two requests needed to learn what is there: <code>initialize</code>, then <code>tools/list</code>. No credentials and no tool calls.</p>
+    </section>
+    <section class="access-story__step" id="access-connection" data-story-step="1">
+      <h2>About one in six never answers.</h2>
+      <p><strong>1,718 endpoints</strong> were broken or unreachable. They are unknown, not closed: a failed connection cannot establish an access policy.</p>
+    </section>
+    <section class="access-story__step" id="access-required" data-story-step="2">
+      <h2>More than a quarter require credentials.</h2>
+      <p><strong>3,092 endpoints</strong> answered with an authentication challenge before an anonymous client could inspect their tools.</p>
+    </section>
+    <section class="access-story__step" id="access-advertised" data-story-step="3">
+      <h2>Another quarter introduces identity.</h2>
+      <p><strong>2,566 endpoints</strong> advertised OAuth while allowing some anonymous progress. That is not the same as forcing authentication, but it makes identity part of the protocol surface.</p>
+    </section>
+    <section class="access-story__step" id="access-open" data-story-step="4">
+      <h2>Only one in three is simply open.</h2>
+      <p><strong>3,511 endpoints (about 31%)</strong> let an anonymous client initialize and inspect the tool list without advertising OAuth.</p>
+    </section>
+  </div>
+</section>
+{{- else -}}
+  {{- errorf "access-story shortcode: generated access journey SVGs not found" -}}
+{{- end -}}

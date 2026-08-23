@@ -1,0 +1,25 @@
+{{- /*
+  Inline a generated panel SVG.
+
+    {{< chart name="ladder" caption="..." reveal="true" >}}
+
+  All-named parameters: Hugo refuses to mix positional and named, so `name` is a
+  named param even when it is the only one.
+
+  Shortcodes emit after markdown rendering, which is why this works at all --
+  raw HTML written directly in a .md file is stripped, because
+  markup.goldmark.renderer.unsafe is off site-wide and should stay that way.
+
+  A missing panel fails loudly at build time rather than leaving a silent hole.
+*/ -}}
+{{- $name := .Get "name" -}}
+{{- $res := resources.Get (printf "mcp/%s.svg" $name) -}}
+{{- with $res -}}
+  {{- $reveal := cond (eq ($.Get "reveal") "true") " reveal" "" -}}
+  <figure class="mcp-chart{{ $reveal }}">
+    {{ .Content | safeHTML }}
+    {{- with $.Get "caption" }}<figcaption>{{ . | markdownify }}</figcaption>{{ end -}}
+  </figure>
+{{- else -}}
+  {{- errorf "chart shortcode: assets/mcp/%s.svg not found (run `make site` in mcp-registry-analysis)" $name -}}
+{{- end -}}
