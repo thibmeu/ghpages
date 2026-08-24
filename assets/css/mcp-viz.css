@@ -93,6 +93,10 @@ body.colorscheme-dark .mcp-viz {
   max-width: 100%;
 }
 
+.mcp-chart__mobile {
+  display: none;
+}
+
 .mcp-chart figcaption {
   margin-top: 0.6rem;
   font-size: 1.6rem;
@@ -513,7 +517,7 @@ body.colorscheme-dark .mcp-viz {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.8rem 1.6rem;
-    margin: 0;
+    margin: clamp(0.9rem, 2svh, 1.25rem) 0 0;
     padding: 1.2rem 0 0;
     border-top: 1px solid var(--viz-grid);
     list-style: none;
@@ -544,8 +548,16 @@ body.colorscheme-dark .mcp-viz {
   .mobile-outcome--optional strong { color: var(--story-optional); }
   .mobile-outcome--open strong { color: var(--story-open); }
 
-  .mcp-viz > .mcp-chart:not(.mcp-chart--journey) svg {
-    min-width: 52rem;
+  .mcp-chart--responsive {
+    overflow-x: clip;
+  }
+
+  .mcp-chart--responsive .mcp-chart__desktop {
+    display: none;
+  }
+
+  .mcp-chart--responsive .mcp-chart__mobile {
+    display: block;
   }
 
   .access-story__steps {
@@ -562,17 +574,29 @@ body.colorscheme-dark .mcp-viz {
 
   .access-story.js-story {
     position: relative;
-    margin-block: 2rem 4rem;
+    margin-block: 2rem 0;
+  }
+
+  .access-story.js-story + p {
+    position: relative;
+    z-index: 3;
+    margin-top: max(-6.4rem, -8svh);
   }
 
   .access-story.js-story .access-story__visual {
     position: sticky;
     top: 0;
     z-index: 1;
-    height: 52vh;
-    height: 52svh;
-    padding-top: max(0.8rem, env(safe-area-inset-top));
+    display: flex;
+    align-items: center;
+    height: 56vh;
+    height: 56svh;
+    padding-block: max(0.8rem, env(safe-area-inset-top)) 0.8rem;
     background: var(--viz-surface);
+  }
+
+  .access-story.js-story .mcp-chart--journey-mobile {
+    width: 100%;
   }
 
   .access-story.js-story .access-story__steps {
@@ -583,17 +607,27 @@ body.colorscheme-dark .mcp-viz {
 
   .access-story.js-story .access-story__step {
     position: sticky;
-    top: 52vh;
-    top: 52svh;
-    height: 48vh;
-    height: 48svh;
-    min-height: 48vh;
-    min-height: 48svh;
+    top: 56vh;
+    top: 56svh;
+    height: 44vh;
+    height: 44svh;
+    min-height: 44vh;
+    min-height: 44svh;
     max-width: none;
     padding: 2rem 0 1.6rem;
     border-top: 1px solid var(--viz-grid);
     background: var(--viz-surface);
     opacity: 0;
+    transition: opacity 420ms cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .access-story.js-story .access-story__step > * {
+    transform: translateY(0.75rem);
+    transition: transform 420ms cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .access-story.js-story .access-story__step.is-past > * {
+    transform: translateY(-0.75rem);
   }
 
   .access-story.js-story .access-story__step h2 {
@@ -606,6 +640,10 @@ body.colorscheme-dark .mcp-viz {
   .access-story.js-story[data-step="3"] [data-story-step="3"],
   .access-story.js-story[data-step="4"] [data-story-step="4"] {
     opacity: 1;
+  }
+
+  .access-story.js-story .access-story__step.is-active > * {
+    transform: translateY(0);
   }
 
   .access-story[data-step="1"] .mobile-outcome--broken,
@@ -621,6 +659,7 @@ body.colorscheme-dark .mcp-viz {
 
 @media (prefers-reduced-motion: reduce) {
   .access-story__step,
+  .access-story.js-story .access-story__step > *,
   .mobile-outcome,
   .mcp-viz .endpoint,
   .access-story.js-story .outcome,

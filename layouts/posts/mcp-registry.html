@@ -75,6 +75,19 @@
     if (!storySteps.length) return;
     story.classList.add('js-story');
 
+    function setStoryStep(value) {
+      var active = Number(value);
+      story.dataset.step = active;
+
+      storySteps.forEach(function (step) {
+        var position = Number(step.dataset.storyStep);
+        step.classList.toggle('is-active', position === active);
+        step.classList.toggle('is-past', position < active);
+      });
+    }
+
+    setStoryStep(0);
+
     if (window.matchMedia('(max-width: 63.99rem)').matches) {
       var stepsBox = story.querySelector('.access-story__steps');
       var ticking = false;
@@ -82,15 +95,11 @@
       function syncMobileStory() {
         var trigger = window.scrollY + window.innerHeight * 0.53;
         var stepsTop = stepsBox.getBoundingClientRect().top + window.scrollY;
-        var active = 0;
+        var stepSpan = stepsBox.scrollHeight / storySteps.length;
+        var progress = Math.floor((trigger - stepsTop) / stepSpan);
+        var active = Math.max(0, Math.min(storySteps.length - 1, progress));
 
-        storySteps.forEach(function (step) {
-          if (trigger >= stepsTop + step.offsetTop) {
-            active = step.dataset.storyStep;
-          }
-        });
-
-        story.dataset.step = active;
+        setStoryStep(active);
         ticking = false;
       }
 
@@ -109,7 +118,7 @@
     var storyObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        story.dataset.step = entry.target.dataset.storyStep;
+        setStoryStep(entry.target.dataset.storyStep);
       });
     }, { rootMargin: '-38% 0px -48% 0px', threshold: 0 });
 

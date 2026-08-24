@@ -14,10 +14,13 @@
 */ -}}
 {{- $name := .Get "name" -}}
 {{- $res := resources.Get (printf "mcp/%s.svg" $name) -}}
+{{- $mobile := resources.Get (printf "mcp/%s_mobile.svg" $name) -}}
 {{- with $res -}}
   {{- $reveal := cond (eq ($.Get "reveal") "true") " reveal" "" -}}
-  <figure class="mcp-chart{{ $reveal }}">
-    {{ .Content | safeHTML }}
+  <figure class="mcp-chart{{ $reveal }}{{ if $mobile }} mcp-chart--responsive{{ end }}">
+    {{- if $mobile }}<div class="mcp-chart__desktop">{{ .Content | safeHTML }}</div>
+    <div class="mcp-chart__mobile">{{ $mobile.Content | safeHTML }}</div>
+    {{- else }}{{ .Content | safeHTML }}{{ end }}
     {{- with $.Get "caption" }}<figcaption>{{ . | markdownify }}</figcaption>{{ end -}}
   </figure>
 {{- else -}}
