@@ -100,8 +100,7 @@ $("publish").addEventListener("submit", async (e) => {
   try {
     const assertion = await assert();
     say("Fetching page and tagging…");
-    const res = await post("/hooks/publish", { url, ...assertion });
-    const { title, tags } = await res.json();
+    const { title, tags } = await (await post("/hooks/publish", { url, ...assertion })).json();
     say(`Published <strong>${title}</strong>${tags.length ? ` — ${tags.join(", ")}` : ""}`, "ok");
     $("url").value = "";
   } catch (err) {
@@ -182,11 +181,10 @@ notifyBtn.addEventListener("click", async () => {
     const existing = await reg.pushManager.getSubscription();
     if (existing) await existing.unsubscribe();
 
-    const sub = await reg.pushManager.subscribe({
+    const { endpoint, keys } = (await reg.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: unb64u(VAPID_PUBLIC),
-    });
-    const { endpoint, keys } = sub.toJSON();
+    })).toJSON();
 
     say("Confirming with your passkey…");
     await post("/hooks/push/subscribe", {
