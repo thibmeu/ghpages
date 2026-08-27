@@ -1,7 +1,7 @@
 baseurl = "https://thibault.uk/"
 title = "Thibault Meunier"
 theme = "hugo-coder"
-languagecode = "en"
+locale = "en"
 defaultcontentlanguage = "en"
 
 paginate = 20
