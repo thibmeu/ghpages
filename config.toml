@@ -20,6 +20,7 @@ pygmentscodefencesguesssyntax = true
     description = "Thibault Meunier's personal website"
     keywords = "blog,developer,personal"
     customCSS = ["css/links.css"]
+    customSCSS = ["scss/content.scss"]
 
     hidecredits = false
     hidecopyright = true

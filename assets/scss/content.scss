@@ -1,0 +1,55 @@
+.content {
+  .post {
+    .post-content {
+      line-height: 1.65;
+
+      > p {
+        margin-block: 1.6rem;
+      }
+
+      > h1,
+      > h2,
+      > h3,
+      > h4,
+      > h5,
+      > h6 {
+        margin-block: 3.2rem 1.4rem;
+      }
+
+      > h2 {
+        font-size: 2.6rem;
+        line-height: 1.2;
+      }
+
+      > h3 {
+        font-size: 2.2rem;
+        line-height: 1.25;
+      }
+
+      @media only screen and (max-width: 768px) {
+        line-height: 1.55;
+
+        > p {
+          margin-block: 1.4rem;
+        }
+
+        > h1,
+        > h2,
+        > h3,
+        > h4,
+        > h5,
+        > h6 {
+          margin-block: 2.8rem 1.2rem;
+        }
+
+        > h2 {
+          font-size: 2.4rem;
+        }
+
+        > h3 {
+          font-size: 2.1rem;
+        }
+      }
+    }
+  }
+}
