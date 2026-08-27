@@ -1,0 +1,71 @@
+{{ define "content" }}
+<section class="container home-journal">
+  <header class="home-intro">
+    <p class="home-kicker">Hello, I’m Thibault.</p>
+    <h1>{{ .Site.Params.info }}</h1>
+    <p class="home-lede">I work on privacy, Internet protocols, and small pieces of software. This is where I share what I build, what I learn, and things from elsewhere that feel worth keeping.</p>
+    {{ partialCached "home/social.html" . }}
+  </header>
+
+  <div class="home-shelves">
+    <section class="home-section home-writing" aria-labelledby="home-writing-title">
+      <div class="home-section-heading">
+        <h2 id="home-writing-title"><a href="{{ relLangURL "posts/" }}">Recent notes</a></h2>
+      </div>
+      <ol class="home-list">
+        {{ $writing := slice }}
+        {{ range where .Site.RegularPages "Section" "posts" }}
+          {{ $writing = $writing | append (dict "title" .Title "date" .Date "url" .RelPermalink "description" .Description) }}
+        {{ end }}
+        {{ range hugo.Data.homepage_writing }}
+          {{ $writing = $writing | append (dict "title" .title "date" (time.AsTime .date) "url" .url "description" .description "publication" .publication "byline" .byline) }}
+        {{ end }}
+        {{ range first 5 (sort $writing "date" "desc") }}
+        <li>
+          <time datetime="{{ .date.Format "2006-01-02" }}">{{ .date.Format "2 Jan 2006" }}</time>
+          <div>
+            <h3><a href="{{ .url }}">{{ .title }}</a></h3>
+            {{ if or .publication .byline }}<p class="home-byline">{{ with .publication }}{{ . }}{{ end }}{{ with .byline }} · {{ . }}{{ end }}</p>{{ end }}
+            {{ with .description }}<p>{{ . }}</p>{{ end }}
+          </div>
+        </li>
+        {{ end }}
+      </ol>
+    </section>
+
+    <section class="home-section home-work" aria-labelledby="home-work-title">
+      <div class="home-section-heading">
+        <h2 id="home-work-title"><a href="{{ relLangURL "work/" }}">Things I’m working on</a></h2>
+      </div>
+      <div class="home-work-list">
+        <article>
+          <h3><a href="{{ relLangURL "work/#ietf" }}">IETF</a></h3>
+          <p>Privacy Pass, bot authentication, and standards for a more interoperable Internet.</p>
+        </article>
+        <article>
+          <h3><a href="https://ohttp.info/">ohttp.info</a></h3>
+          <p>An illustrated guide to hiding a client’s identity from the server it contacts.</p>
+        </article>
+        <article>
+          <h3><a href="https://github.com/thibmeu/drand-rs">dee</a></h3>
+          <p>A small command-line tool for public randomness and time-lock encryption.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-section home-discoveries" aria-labelledby="home-discoveries-title">
+      <div class="home-section-heading">
+        <h2 id="home-discoveries-title"><a href="{{ relLangURL "links/" }}">Found lately</a></h2>
+      </div>
+      <ol class="home-link-list">
+        {{ range first 5 (where .Site.RegularPages.ByDate.Reverse "Section" "links") }}
+        <li>
+          <a href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
+          {{ with .GetTerms "tags" }}<span>{{ (index . 0).LinkTitle }}</span>{{ end }}
+        </li>
+        {{ end }}
+      </ol>
+    </section>
+  </div>
+</section>
+{{ end }}

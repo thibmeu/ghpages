@@ -1,0 +1,32 @@
+- title: "Moving past bots vs. humans"
+  date: 2026-04-21
+  url: "https://blog.cloudflare.com/past-bots-and-humans/"
+  description: "Why intent and behaviour matter more than the increasingly blurry distinction between people and automation"
+  publication: "Cloudflare"
+
+- title: "Beyond IP lists: a registry format for bots and agents"
+  date: 2025-10-30
+  url: "https://blog.cloudflare.com/agent-registry/"
+  description: "A discovery mechanism for the public keys used by bots and agents"
+  publication: "Cloudflare"
+  byline: "with Maxime Guerreiro"
+
+- title: "Anonymous credentials: rate-limiting bots and agents without compromising privacy"
+  date: 2025-10-30
+  url: "https://blog.cloudflare.com/private-rate-limiting/"
+  description: "Using anonymous credentials to rate-limit automated traffic without turning identity into a tracking mechanism"
+  publication: "Cloudflare"
+  byline: "with Christopher Patton, Lena Heimberger, and Armando Faz-Hernández"
+
+- title: "Forget IPs: using cryptography to verify bot and agent traffic"
+  date: 2025-05-15
+  url: "https://blog.cloudflare.com/web-bot-auth/"
+  description: "Replacing fragile IP allowlists with signed requests and short-lived certificates"
+  publication: "Cloudflare"
+  byline: "with Mari Galicer"
+
+- title: "Sometimes I cache: implementing lock-free probabilistic caching"
+  date: 2024-12-26
+  url: "https://blog.cloudflare.com/sometimes-i-cache/"
+  description: "How probability can prevent cache stampedes without a cache lock"
+  publication: "Cloudflare"

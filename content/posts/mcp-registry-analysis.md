@@ -2,6 +2,7 @@
 title = "Probing the MCP registry for anonymous access"
 date = 2026-08-27T12:00:00+02:00
 layout = "mcp-registry"
+description = "What 10,950 remote MCP endpoints reveal about authentication and openness in the ecosystem"
 tags = ["mcp", "oauth", "open web"]
 +++
 

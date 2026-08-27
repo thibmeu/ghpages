@@ -16,6 +16,11 @@
 .title-group {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+}
+
+.list .title-group .title {
+  overflow-wrap: anywhere;
 }
 
 .link-tags {
@@ -67,6 +72,17 @@
   .links-filter {
     margin-left: calc(20rem + 1.5rem);
     width: calc(100% - 20rem - 1.5rem);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .list ul:not(.pagination) li {
+    min-width: 0;
+  }
+
+  .links-filter,
+  #links-list {
+    max-width: 100%;
   }
 }
 
