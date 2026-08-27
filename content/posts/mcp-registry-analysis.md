@@ -1,13 +1,8 @@
 +++
 title = "Probing the MCP registry for anonymous access"
-date = 2026-09-01T12:00:00+02:00
-draft = false
+date = 2026-08-27T12:00:00+02:00
 layout = "mcp-registry"
 tags = ["mcp", "oauth", "open web"]
-
-[build]
-list = "never"
-render = "always"
 +++
 
 The Model Context Protocol, or MCP for short, is ["an open-source standard for connecting AI applications to external systems"](https://modelcontextprotocol.io/docs/getting-started/intro).
@@ -83,3 +78,5 @@ I wanted to better understand how the openness story works in the MCP ecosystem.
 Authentication may be the right choice for many servers, and the fact that they support it acknowledges that these primitives are accessible and in demand. The result from this analysis of the official MCP registry is that simply open tool discovery is not the majority experience for these remote servers. There is of course further analysis to conduct. Why do people use authentication? Why do they advertise it? Is what is being communicated actually enforced? Is authentication moving to [Client ID Metadata Documents](https://cimd.dev/) now that CIMD is recommended in the specification? Do different services make different choices? How do users discover content from websites that do not have MCP, and can they customise the search of such content?
 
 If you want to rerun the experiment, or expand it, you can check [thibmeu/are-mcps-open-yet](https://github.com/thibmeu/are-mcps-open-yet). It contains a snapshot of the data I used to construct this blog, which you can inspect with SQL and the [DuckDB CLI](https://duckdb.org/docs/stable/clients/cli/overview.html).
+
+*Thanks to Sven Sauleau for the early review and feedback.*

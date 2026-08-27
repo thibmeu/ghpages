@@ -11,7 +11,6 @@ At Cloudflare I work on Privacy Pass and bot authentication. At the IETF, I writ
 I chair the [Open Cloud Mesh (OCM)](https://datatracker.ietf.org/wg/ocm/about/) working group, standardising federated file sharing across organisations. At the W3C, I co-chaired [PACT](https://pactworkshop.com/), the workshop on private access control.
 
 * [HTTP Message Signatures for Automated Traffic](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-protocol/) — draft-meunier-webbotauth-httpsig-protocol
-* [HTTP Message Signatures Directory](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-directory/) — draft-meunier-webbotauth-httpsig-directory
 * [Registry and Signature Agent Card for Web Bot Auth](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-registry/) — draft-meunier-webbotauth-registry
 * [Moderation of unLinkable Endorsements (MoLE) Architecture](https://datatracker.ietf.org/doc/draft-jms-mole-architecture/) - draft-jms-mole-architecture
 * [MoLE HTTP Transport](https://datatracker.ietf.org/doc/draft-jms-mole-http-transport/) - draft-jms-mole-http-transport
@@ -42,11 +41,14 @@ More on the [Cloudflare blog](https://blog.cloudflare.com/author/thibault/).
 * [age-plugin-simplepq](https://github.com/thibmeu/age-plugin-simplepq) — Simple post-quantum plugin for age
 * [age-plugin-hpke](https://github.com/thibmeu/age-plugin-hpke) — HPKE plugin for age
 * [http-message-signatures-directory](https://github.com/thibmeu/http-message-signatures-directory) — Proposal for signing bot traffic with per-provider keys
-* [ohttp-ts](https://github.com/thibmeu/ohttp-ts) — Oblivious HTTP implementation in TypeScript
+* [ohttp-ts](https://github.com/thibmeu/ohttp-ts) — Oblivious HTTP implementation in TypeScript. Used in [ohttp-relay](https://github.com/thibmeu/ohttp-relay) and [ohttp-gateway](https://github.com/thibmeu/ohttp-gateway)
 * [quicvarint](https://github.com/thibmeu/quicvarint) — Variable-length integer encoding from RFC 9000
 * [doh-proxy-worker-template](https://github.com/thibmeu/doh-proxy-worker-template) — DNS over HTTPS Cloudflare Worker
 
 ## Presentations
 
-* [Des lampes à lave pour sécuriser Internet](/pdf/lava-lamps.pdf) — Cloudflare, 2024. How lava lamps generate entropy to secure the web.
+* [Oblivious HTTP: When the servers does not want to see your IP](https://passthesalt.ubicast.tv/videos/2026-oblivious-http-when-the-server-does-not-want-to-see-your-ip/) - Pass The Salt 2026
+* [Key Transparency: My friends have phone numbers, not public keys](https://passthesalt.ubicast.tv/videos/my-friends-have-phone-numbers-not-public-keys-trimmed/) - Pass The Salt 2024
+* [Auditting Key Tranparency](https://www.youtube.com/watch?v=JKkTZJPTh6o) - Real World Crypto 2025
+* [Des lampes à lave pour sécuriser Internet](/pdf/lava-lamps.pdf) — Toulouse Tech Meetup, 2024. How lava lamps generate entropy to secure the web.
 * [Le développement d'un outil de chiffrement et l'importance de son interface utilisateur](/pdf/capitole-libre.html) — Capitole du Libre, 2023. Building dee and timelock encryption.

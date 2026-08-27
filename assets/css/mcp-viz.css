@@ -462,8 +462,8 @@ body.colorscheme-dark .mcp-viz {
     width: min(92rem, calc(100vw - 2rem));
     margin-left: 50%;
     transform: translateX(-50%);
-    grid-template-columns: minmax(0, 2fr) minmax(20rem, 0.65fr);
-    gap: clamp(2rem, 4vw, 4rem);
+    grid-template-columns: minmax(0, 1.8fr) minmax(24rem, 0.8fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
   }
 
   .access-story__visual {
