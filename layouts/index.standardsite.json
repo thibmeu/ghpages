@@ -1,0 +1,22 @@
+{{- $documents := slice -}}
+{{- range where .Site.RegularPages "Section" "posts" -}}
+  {{- if not .Params.externalLink -}}
+    {{- $documents = $documents | append (dict
+      "rkey" .File.ContentBaseName
+      "path" .RelPermalink
+      "title" .Title
+      "description" (.Description | default .Summary | plainify)
+      "publishedAt" (.Date.UTC.Format "2006-01-02T15:04:05.000Z")
+      "tags" (.Params.tags | default (slice))
+    ) -}}
+  {{- end -}}
+{{- end -}}
+{{- dict
+  "publication" (dict
+    "rkey" .Site.Params.standardSitePublication
+    "url" (strings.TrimSuffix "/" .Site.BaseURL)
+    "name" .Site.Title
+    "description" .Site.Params.description
+  )
+  "documents" $documents
+  | jsonify -}}

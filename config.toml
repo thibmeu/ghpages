@@ -5,14 +5,25 @@ locale = "en"
 defaultcontentlanguage = "en"
 
 paginate = 20
-
-[taxonomies]
-  tag = "tags"
 canonifyurls = false
-
 pygmentsstyle = "monokai"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
+
+[taxonomies]
+  tag = "tags"
+
+[mediaTypes."application/vnd.standard-site+json"]
+  suffixes = ["json"]
+
+[outputFormats.StandardSite]
+  mediaType = "application/vnd.standard-site+json"
+  baseName = "standard-site"
+  isPlainText = true
+  notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "StandardSite"]
 
 [params]
     author = "Thibault Meunier"
@@ -22,6 +33,8 @@ pygmentscodefencesguesssyntax = true
     customCSS = ["css/links.css"]
     customSCSS = ["scss/content.scss", "scss/home.scss"]
     manifest = "/manifest.webmanifest"
+    standardSiteDID = "did:plc:axsoagliiwugidqvfa2vl6g3"
+    standardSitePublication = "main"
 
     hidecredits = false
     hidecopyright = true

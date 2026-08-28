@@ -1,1 +1,5 @@
+<link rel="site.standard.publication" href="at://{{ .Site.Params.standardSiteDID }}/site.standard.publication/{{ .Site.Params.standardSitePublication }}">
+{{- if and (eq .Section "posts") .IsPage (not .Params.externalLink) }}
+<link rel="site.standard.document" href="at://{{ .Site.Params.standardSiteDID }}/site.standard.document/{{ .File.ContentBaseName }}">
+{{- end }}
 <link rel="icon" href="/images/icon.svg" type="image/svg+xml">
