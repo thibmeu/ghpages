@@ -1,4 +1,99 @@
+@font-face {
+  font-family: "Manuale";
+  src: url("/fonts/manuale-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --font-editorial: "Manuale", Georgia, serif;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  z-index: 20;
+  padding: var(--space-sm) var(--space-md);
+  color: inherit;
+  background: inherit;
+  border: 1px solid currentColor;
+  transform: translateY(calc(-100% - var(--space-lg)));
+  transition: transform 160ms ease-out;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.skip-target:focus {
+  outline: 0;
+}
+
+#dark-mode-toggle {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+}
+
+.home-shelves,
+.content .post > article > header,
+.content .page > article > header,
+.content .list > header {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset-block: 0;
+    left: 50%;
+    width: 100vw;
+    border-block: 1px solid color-mix(in srgb, currentColor 9%, transparent);
+    background: color-mix(in srgb, currentColor 2.5%, transparent);
+    content: "";
+    transform: translateX(-50%);
+  }
+}
+
 .content {
+  .post > article > header,
+  .page > article > header,
+  .list > header {
+    margin-block: clamp(2.4rem, 5vw, 4.8rem) clamp(3.2rem, 5vw, 4.8rem);
+    padding-block: clamp(2.4rem, 4vw, 3.2rem);
+
+    h1 {
+      max-width: 24ch;
+      font-family: var(--font-editorial);
+      font-size: clamp(3.6rem, 5vw, 4.8rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  .post .post-meta {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    opacity: 0.64;
+  }
+
+  .post .post-title {
+    margin-bottom: 1.2rem;
+  }
+
+  .post .post-content,
+  .page article {
+    > h2,
+    > h3 {
+      font-family: var(--font-editorial);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+  }
   .post {
     .post-content {
       line-height: 1.65;

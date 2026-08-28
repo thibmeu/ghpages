@@ -28,7 +28,7 @@ pygmentscodefencesguesssyntax = true
 [params]
     author = "Thibault Meunier"
     info = "I talk to computers to make them work"
-    description = "Thibault Meunier's personal website"
+    description = "Writing and projects about privacy, Internet protocols, and small pieces of software."
     keywords = "blog,developer,personal"
     customCSS = ["css/links.css"]
     customSCSS = ["scss/content.scss", "scss/home.scss"]
