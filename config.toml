@@ -1,4 +1,4 @@
-baseurl = "https://thibault.uk/"
+baseurl = "https://thibmeu.com/"
 title = "Thibault Meunier"
 theme = "hugo-coder"
 locale = "en"
@@ -21,6 +21,7 @@ pygmentscodefencesguesssyntax = true
     keywords = "blog,developer,personal"
     customCSS = ["css/links.css"]
     customSCSS = ["scss/content.scss", "scss/home.scss"]
+    manifest = "/manifest.webmanifest"
 
     hidecredits = false
     hidecopyright = true

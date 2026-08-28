@@ -35,7 +35,7 @@
 </section>
 
 <script>
-const RP_ID = "thibault.uk";
+const RP_ID = "thibmeu.com";
 const VAPID_PUBLIC = "BNi7RTi3DuGMsvM3HMJw57Pvbtdjqal6tv6xqI0X_qltKpq7VP97xvG-kWymrSYAShm0p4Zdc3AXsAxxd2e2rm4";
 
 const $ = (id) => document.getElementById(id);
@@ -116,7 +116,7 @@ $("enrol-btn").addEventListener("click", async () => {
     const cred = await navigator.credentials.create({
       publicKey: {
         challenge: await challenge(),
-        rp: { id: RP_ID, name: "thibault.uk" },
+        rp: { id: RP_ID, name: "thibmeu.com" },
         // Stable user id so re-enrolling replaces the passkey instead of piling up.
         user: {
           id: new TextEncoder().encode("thibmeu"),

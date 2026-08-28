@@ -1,6 +1,7 @@
 {
   "name": "Thibault Meunier",
-  "short_name": "thibault.uk",
+  "short_name": "thibmeu.com",
+  "id": "/",
   "start_url": "/links/new/",
   "scope": "/",
   "display": "standalone",

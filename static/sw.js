@@ -5,11 +5,11 @@ self.addEventListener("push", (event) => {
   try {
     note = event.data ? event.data.json() : {};
   } catch {
-    note = { title: event.data ? event.data.text() : "thibault.uk" };
+    note = { title: event.data ? event.data.text() : "thibmeu.com" };
   }
 
   event.waitUntil(
-    self.registration.showNotification(note.title || "thibault.uk", {
+    self.registration.showNotification(note.title || "thibmeu.com", {
       body: note.body || "",
       icon: "/images/icon.svg",
       data: { url: note.url || "/" },

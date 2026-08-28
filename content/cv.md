@@ -3,7 +3,7 @@ title: Thibault Meunier
 type: cv
 ---
 
-[thibault.uk](https://thibault.uk) · [github.com/thibmeu](https://github.com/thibmeu) · [cv@thibault.uk](mailto:cv@thibault.uk)
+[thibmeu.com](https://thibmeu.com) · [github.com/thibmeu](https://github.com/thibmeu) · [cv@thibault.uk](mailto:cv@thibault.uk)
 
 Principal Research Engineer at Cloudflare working on privacy-preserving authentication for the web.
 
