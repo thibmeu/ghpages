@@ -5,9 +5,10 @@
     <h1>{{ .Site.Params.info }}</h1>
     <p class="home-lede">I work on privacy, Internet protocols, and small pieces of software. This is where I share what I build, what I learn, and things from elsewhere that feel worth keeping.</p>
     {{ partialCached "home/social.html" . }}
+    <a class="home-scroll-cue" href="#home-shelves">More below <span aria-hidden="true">&#8595;</span></a>
   </header>
 
-  <div class="home-shelves">
+  <div class="home-shelves" id="home-shelves">
     <section class="home-section home-writing" aria-labelledby="home-writing-title">
       <div class="home-section-heading">
         <h2 id="home-writing-title"><a href="{{ relLangURL "posts/" }}">Recent notes</a></h2>

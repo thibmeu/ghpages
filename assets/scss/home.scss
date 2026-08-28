@@ -26,8 +26,8 @@ body {
 .home-journal {
   display: flex;
   flex-direction: column;
-  gap: clamp(var(--space-3xl), 8vw, var(--space-4xl));
-  padding-block: clamp(var(--space-2xl), 7vw, var(--space-4xl));
+  gap: clamp(var(--space-2xl), 6vw, var(--space-3xl));
+  padding-block: clamp(var(--space-xl), 5vw, var(--space-3xl));
 }
 
 .home-intro {
@@ -73,6 +73,10 @@ body {
   min-height: 4.4rem;
   margin-left: -1.2rem;
   color: inherit;
+}
+
+.home-scroll-cue {
+  display: none;
 }
 
 .home-shelves {
@@ -216,7 +220,8 @@ body {
 
 @media only screen and (max-width: 768px) {
   .home-journal {
-    padding-top: var(--space-xl);
+    gap: var(--space-2xl);
+    padding-top: var(--space-lg);
   }
 
   .home-intro h1 {
@@ -226,6 +231,29 @@ body {
   .home-intro .home-lede {
     font-size: 1.8rem;
     line-height: 1.65;
+  }
+
+  .home-intro ul {
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .home-scroll-cue {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-height: 4.4rem;
+    margin-top: var(--space-sm);
+    color: inherit;
+    font-size: 1.4rem;
+    font-weight: 500;
+    opacity: 0.62;
+    text-decoration: none;
+  }
+
+  .home-scroll-cue span {
+    font-size: 1.8rem;
+    line-height: 1;
   }
 
   .home-shelves {
@@ -253,6 +281,44 @@ body {
   .footer .container {
     flex-direction: column;
     gap: 0;
+  }
+}
+
+body.colorscheme-dark {
+  color: oklch(0.86 0.012 72);
+  background-color: oklch(0.205 0.014 58);
+}
+
+body.colorscheme-dark h1,
+body.colorscheme-dark h2,
+body.colorscheme-dark h3,
+body.colorscheme-dark h4,
+body.colorscheme-dark h5,
+body.colorscheme-dark h6 {
+  color: oklch(0.9 0.014 72);
+}
+
+body.colorscheme-dark .navigation .navigation-list {
+  background-color: oklch(0.205 0.014 58);
+}
+
+@media (prefers-color-scheme: dark) {
+  body.colorscheme-auto {
+    color: oklch(0.86 0.012 72);
+    background-color: oklch(0.205 0.014 58);
+  }
+
+  body.colorscheme-auto h1,
+  body.colorscheme-auto h2,
+  body.colorscheme-auto h3,
+  body.colorscheme-auto h4,
+  body.colorscheme-auto h5,
+  body.colorscheme-auto h6 {
+    color: oklch(0.9 0.014 72);
+  }
+
+  body.colorscheme-auto .navigation .navigation-list {
+    background-color: oklch(0.205 0.014 58);
   }
 }
 
