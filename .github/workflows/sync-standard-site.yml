@@ -32,9 +32,12 @@ jobs:
           hugo-version: "0.165.0"
           extended: true
 
+      - name: Install cover generator
+        run: npm ci
+
       # A production build deliberately omits drafts and future-dated posts.
       - name: Build publishable-post catalog
-        run: hugo --gc --minify
+        run: hugo --gc --minify && npm run covers
 
       - name: Sync Standard.site records
         env:

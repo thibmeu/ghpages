@@ -2,7 +2,7 @@
   "$schema": "https://unpkg.com/wrangler/config-schema.json",
   "name": "ghpages",
   "build": {
-    "command": "hugo --gc --minify -D -F"
+    "command": "npm run build"
   },
   "compatibility_date": "2026-04-17",
   "assets": {

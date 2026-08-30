@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Endpaper experiments</title>
+    <style>
+      @font-face {
+        font-family: "Manuale";
+        src: url("/fonts/manuale-latin.woff2") format("woff2");
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+      }
+
+      :root {
+        color-scheme: dark;
+        --paper: oklch(88% 0.025 78);
+        --ink: oklch(24% 0.025 342);
+        --muted: oklch(69% 0.022 67);
+        --surface: oklch(19% 0.018 338);
+        --rule: oklch(42% 0.025 350);
+        --accent: oklch(72% 0.09 76);
+        --space-xs: 4px;
+        --space-sm: 8px;
+        --space-md: 12px;
+        --space-lg: 24px;
+        --space-xl: 32px;
+        --space-2xl: 48px;
+        --space-3xl: 64px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        color: var(--paper);
+        background:
+          linear-gradient(90deg, transparent 49.9%, color-mix(in oklch, var(--rule) 22%, transparent) 50%, transparent 50.1%),
+          var(--surface);
+        font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      button,
+      select,
+      input[type="text"] {
+        min-height: 44px;
+        color: inherit;
+        background: color-mix(in oklch, var(--surface) 84%, var(--paper));
+        border: 1px solid var(--rule);
+        border-radius: 2px;
+      }
+
+      button {
+        padding: var(--space-sm) var(--space-md);
+        cursor: pointer;
+      }
+
+      button:hover,
+      button:focus-visible,
+      select:hover,
+      select:focus-visible,
+      input:focus-visible {
+        border-color: var(--accent);
+        outline: 1px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .page {
+        display: grid;
+        grid-template-columns: minmax(16rem, 23rem) minmax(0, 1fr);
+        min-height: 100vh;
+      }
+
+      .controls {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xl);
+        padding: clamp(var(--space-lg), 4vw, var(--space-2xl));
+        border-bottom: 1px solid var(--rule);
+        background: color-mix(in oklch, var(--surface) 94%, var(--ink));
+      }
+
+      .eyebrow {
+        margin: 0 0 var(--space-sm);
+        color: var(--accent);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 9ch;
+        margin: 0;
+        font-family: "Manuale", Georgia, serif;
+        font-size: clamp(2.5rem, 5vw, 4.6rem);
+        line-height: 0.88;
+        letter-spacing: -0.035em;
+      }
+
+      .intro {
+        max-width: 32ch;
+        margin: var(--space-lg) 0 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .control-grid {
+        display: grid;
+        gap: var(--space-lg);
+      }
+
+      .field {
+        display: grid;
+        gap: var(--space-sm);
+      }
+
+      .field label,
+      .field-label {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .field input[type="text"],
+      .field select {
+        width: 100%;
+        padding-inline: var(--space-md);
+      }
+
+      .range-row {
+        display: grid;
+        grid-template-columns: 1fr 3ch;
+        gap: var(--space-md);
+        align-items: center;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--accent);
+      }
+
+      output {
+        color: var(--paper);
+        font-variant-numeric: tabular-nums;
+        text-align: right;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm);
+      }
+
+      .actions .primary {
+        color: var(--surface);
+        background: var(--accent);
+        border-color: var(--accent);
+        font-weight: 700;
+      }
+
+      .stage {
+        display: grid;
+        align-content: center;
+        gap: var(--space-lg);
+        padding: clamp(var(--space-lg), 5vw, var(--space-3xl));
+      }
+
+      .canvas-frame {
+        position: relative;
+        width: 100%;
+        border: 1px solid color-mix(in oklch, var(--paper) 25%, transparent);
+        background: var(--ink);
+        box-shadow: 0 24px 70px color-mix(in oklch, var(--ink) 72%, transparent);
+      }
+
+      canvas {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1200 / 630;
+      }
+
+      .caption {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-lg);
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .caption span:last-child {
+        color: var(--accent);
+      }
+
+      @media (max-width: 760px) {
+        .page {
+          grid-template-columns: 1fr;
+        }
+
+        .controls {
+          padding-bottom: var(--space-xl);
+        }
+
+        h1 {
+          max-width: none;
+          font-size: clamp(2.8rem, 14vw, 4rem);
+        }
+
+        .intro {
+          max-width: 48ch;
+        }
+
+        .control-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .stage {
+          align-content: start;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .control-grid,
+        .actions {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          max-width: 9ch;
+        }
+
+        .caption {
+          flex-direction: column;
+          gap: var(--space-xs);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="controls" aria-labelledby="page-title">
+        <header>
+          <p class="eyebrow">Cover study 01</p>
+          <h1 id="page-title">Lost manuals</h1>
+          <p class="intro">Abstract endpapers from a technical library that never existed. Every choice is derived from the seed.</p>
+        </header>
+
+        <div class="control-grid">
+          <div class="field">
+            <label for="seed">Post seed</label>
+            <input id="seed" type="text" value="when-an-mcp-client-knocks" spellcheck="false">
+          </div>
+
+          <div class="field">
+            <label for="palette">Ink set</label>
+            <select id="palette">
+              <option value="auto">Chosen by seed</option>
+              <option value="0">Petrol &amp; amber</option>
+              <option value="1">Plum &amp; oxidised teal</option>
+              <option value="2">Oxblood &amp; terminal green</option>
+              <option value="3">Midnight &amp; faded coral</option>
+              <option value="4">Tobacco &amp; electric violet</option>
+              <option value="5">Graphite &amp; signal blue</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="composition">Plate</label>
+            <select id="composition">
+              <option value="auto">Chosen by seed</option>
+              <option value="0">The fold</option>
+              <option value="1">The eclipse</option>
+              <option value="2">The archive</option>
+              <option value="3">The signal</option>
+              <option value="4">The aperture</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="age">Patina</label>
+            <div class="range-row">
+              <input id="age" type="range" min="0" max="24" value="10">
+              <output id="age-output" for="age">10</output>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="shuffle" type="button">New seed</button>
+          <button id="download" class="primary" type="button">Save PNG</button>
+        </div>
+      </section>
+
+      <section class="stage" aria-label="Generated cover preview">
+        <div class="canvas-frame">
+          <canvas id="cover" width="1200" height="630">A generated abstract cover.</canvas>
+        </div>
+        <p class="caption">
+          <span id="description">A deterministic abstract cover.</span>
+          <span>1200 × 630 · PNG</span>
+        </p>
+      </section>
+    </main>
+
+    <script type="module">
+      import { coverSvg } from "/js/endpaper-core.mjs";
+
+      const canvas = document.querySelector("#cover");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const seedInput = document.querySelector("#seed");
+      const paletteInput = document.querySelector("#palette");
+      const compositionInput = document.querySelector("#composition");
+      const ageInput = document.querySelector("#age");
+      const ageOutput = document.querySelector("#age-output");
+      const description = document.querySelector("#description");
+
+      async function draw() {
+        const seed = seedInput.value.trim() || "untitled";
+        const age = Number(ageInput.value);
+        const result = coverSvg(seed, {
+          palette: paletteInput.value,
+          composition: compositionInput.value,
+          patina: age,
+        });
+        const url = URL.createObjectURL(new Blob([result.svg], { type: "image/svg+xml" }));
+        const image = new Image();
+        image.src = url;
+        await image.decode();
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(url);
+
+        ageOutput.value = age;
+        canvas.setAttribute("aria-label", `${result.composition}, ${result.palette.name}, abstract cover for ${seed}`);
+        description.textContent = `${result.composition} · ${result.palette.name} · seed ${result.seedHash.toString(16).padStart(8, "0")}`;
+
+        const params = new URLSearchParams();
+        params.set("seed", seed);
+        if (paletteInput.value !== "auto") params.set("palette", paletteInput.value);
+        if (compositionInput.value !== "auto") params.set("plate", compositionInput.value);
+        if (age !== 10) params.set("age", String(age));
+        history.replaceState(null, "", `${location.pathname}?${params}`);
+      }
+
+      function loadFromUrl() {
+        const params = new URLSearchParams(location.search);
+        if (params.has("seed")) seedInput.value = params.get("seed");
+        if (params.has("palette")) paletteInput.value = params.get("palette");
+        if (params.has("plate")) compositionInput.value = params.get("plate");
+        if (params.has("age")) ageInput.value = params.get("age");
+      }
+
+      document.querySelectorAll("input, select").forEach((control) => control.addEventListener("change", draw));
+
+      document.querySelector("#shuffle").addEventListener("click", () => {
+        const words = ["amber", "archive", "circuit", "fold", "nocturne", "oxide", "signal", "velvet"];
+        const bytes = new Uint32Array(2);
+        crypto.getRandomValues(bytes);
+        seedInput.value = `${words[bytes[0] % words.length]}-${words[bytes[1] % words.length]}-${(bytes[0] ^ bytes[1]).toString(16).slice(0, 4)}`;
+        paletteInput.value = "auto";
+        compositionInput.value = "auto";
+        draw();
+      });
+
+      document.querySelector("#download").addEventListener("click", () => {
+        const anchor = document.createElement("a");
+        const safeSeed = (seedInput.value.trim() || "untitled").replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase();
+        anchor.download = `${safeSeed}-cover.png`;
+        anchor.href = canvas.toDataURL("image/png");
+        anchor.click();
+      });
+
+      loadFromUrl();
+      draw();
+    </script>
+  </body>
+</html>

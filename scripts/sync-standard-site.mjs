@@ -45,6 +45,18 @@ const put = (collection, rkey, record) =>
     body: JSON.stringify({ repo: did, collection, rkey, record }),
   });
 
+const uploadCover = async (rkey) => {
+  const bytes = await readFile(new URL(`../public/images/covers/${rkey}.png`, import.meta.url));
+  return json(`${pds}/xrpc/com.atproto.repo.uploadBlob`, {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${session.accessJwt}`,
+      "content-type": "image/png",
+    },
+    body: bytes,
+  });
+};
+
 await put("site.standard.publication", catalog.publication.rkey, {
   $type: "site.standard.publication",
   url: catalog.publication.url,
@@ -55,9 +67,11 @@ await put("site.standard.publication", catalog.publication.rkey, {
 
 for (const document of catalog.documents) {
   const { rkey, ...metadata } = document;
+  const { blob: coverImage } = await uploadCover(rkey);
   await put("site.standard.document", rkey, {
     $type: "site.standard.document",
     site: publicationUri,
+    coverImage,
     ...metadata,
   });
 }

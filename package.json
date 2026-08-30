@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "hugo --gc --minify -D -F && node scripts/generate-covers.mjs",
+    "covers": "node scripts/generate-covers.mjs"
+  },
+  "dependencies": {
+    "sharp": "0.35.4"
+  }
+}
