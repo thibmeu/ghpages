@@ -80,4 +80,4 @@ Authentication may be the right choice for many servers, and the fact that they 
 
 If you want to rerun the experiment, or expand it, you can check [thibmeu/are-mcps-open-yet](https://github.com/thibmeu/are-mcps-open-yet). It contains a snapshot of the data I used to construct this blog, which you can inspect with SQL and the [DuckDB CLI](https://duckdb.org/docs/stable/clients/cli/overview.html).
 
-*Thanks to Sven Sauleau for the early review and feedback.*
+*Thanks to [Sven Sauleau](https://sauleau.com) for the early review and feedback.*
