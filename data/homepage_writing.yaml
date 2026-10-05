@@ -1,3 +1,9 @@
+- title: "Support for modern cryptographic algorithms in Workers"
+  date: 2026-10-01
+  url: "https://blog.cloudflare.com/workers-ml-kem-ml-dsa-support/"
+  description: "Opt-in support for the post-quantum algorithms ML-KEM and ML-DSA in Cloudflare Workers"
+  publication: "Cloudflare"
+
 - title: "Moving past bots vs. humans"
   date: 2026-04-21
   url: "https://blog.cloudflare.com/past-bots-and-humans/"
@@ -10,13 +16,6 @@
   description: "A discovery mechanism for the public keys used by bots and agents"
   publication: "Cloudflare"
   byline: "with Maxime Guerreiro"
-
-- title: "Anonymous credentials: rate-limiting bots and agents without compromising privacy"
-  date: 2025-10-30
-  url: "https://blog.cloudflare.com/private-rate-limiting/"
-  description: "Using anonymous credentials to rate-limit automated traffic without turning identity into a tracking mechanism"
-  publication: "Cloudflare"
-  byline: "with Christopher Patton, Lena Heimberger, and Armando Faz-Hernández"
 
 - title: "Forget IPs: using cryptography to verify bot and agent traffic"
   date: 2025-05-15
