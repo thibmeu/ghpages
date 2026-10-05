@@ -16,7 +16,7 @@ Principal Research Engineer at Cloudflare working on privacy-preserving authenti
 - Initiated Web Bot Auth, cryptographic verification of bot and agent traffic with HTTP message signatures. Major CDN, cloud, and AI providers now run independent implementations.
 - Built anonymous-credential rate limiting for bots and agents without compromising user privacy.
 - Shipped key transparency auditing for WhatsApp's end-to-end encrypted messaging: public dashboard, Real World Crypto talk, and follow-up standardisation work.
-- Co-designed the Cryptographic Attestation of Personhood, a CAPTCHA alternative studied in a SOUPS 2022 paper.
+- Co-designed the Cryptographic Attestation of Personhood, a CAPTCHA alternative studied at SOUPS 2022.
 - Designed and implemented lock-free probabilistic caching in Cloudflare's CDN.
 - Mentor team members, and have written more than 15 posts for the [Cloudflare blog](https://blog.cloudflare.com/author/thibault/).
 
@@ -34,7 +34,7 @@ Principal Research Engineer at Cloudflare working on privacy-preserving authenti
 - Chair of the IETF [Open Cloud Mesh (OCM)](https://datatracker.ietf.org/wg/ocm/about/) working group, which standardises federated file sharing.
 - [Batched Token Issuance Protocol](https://datatracker.ietf.org/doc/draft-ietf-privacypass-batched-tokens/) — draft-ietf-privacypass-batched-tokens, submitted for publication.
 - [Privacy Pass Reverse Flow](https://datatracker.ietf.org/doc/draft-meunier-privacypass-reverse-flow/) — draft-meunier-privacypass-reverse-flow, an extension of the Privacy Pass issuance flow.
-- Author of the Web Bot Auth drafts (HTTP message signatures [protocol](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-protocol/), [directory](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-directory/), [registry](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-registry/)).
+- Author of the Web Bot Auth drafts ([protocol](https://datatracker.ietf.org/doc/draft-ietf-webbotauth-httpsig-protocol/), [registry](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-registry/)).
 
 ## Selected publications & writing
 
@@ -46,7 +46,7 @@ Principal Research Engineer at Cloudflare working on privacy-preserving authenti
 
 ## Open source
 
-[tlock-rs](https://github.com/thibmeu/tlock-rs) and [drand-rs](https://github.com/thibmeu/drand-rs) (timelock encryption in Rust) · [age-plugin-simplepq](https://github.com/thibmeu/age-plugin-simplepq) and [age-plugin-hpke](https://github.com/thibmeu/age-plugin-hpke) (post-quantum and HPKE plugins for age) · [ohttp-ts](https://github.com/thibmeu/ohttp-ts) (Oblivious HTTP in TypeScript)
+[tlock-rs](https://github.com/thibmeu/tlock-rs) and [drand-rs](https://github.com/thibmeu/drand-rs) (timelock encryption in Rust) · [age-plugin-simplepq](https://github.com/thibmeu/age-plugin-simplepq) and [age-plugin-hpke](https://github.com/thibmeu/age-plugin-hpke) (post-quantum and HPKE plugins for age) · [ohttp-ts](https://github.com/thibmeu/ohttp-ts) (Oblivious HTTP in TypeScript) · [privacypass-ts](https://github.com/cloudflare/privacypass-ts) · [web-bot-auth](https://github.com/cloudflare/web-bot-auth)
 
 ## Education
 
