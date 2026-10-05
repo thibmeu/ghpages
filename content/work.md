@@ -22,6 +22,7 @@ More on the [IETF Datatracker](https://datatracker.ietf.org/person/ot-ietf@thiba
 
 ## Cloudflare
 
+* [Support for modern cryptographic algorithms in Workers](https://blog.cloudflare.com/workers-ml-kem-ml-dsa-support/) (2026)
 * [Moving past bots vs. humans](https://blog.cloudflare.com/past-bots-and-humans/) (2026)
 * [Forget IPs: using cryptography to verify bot and agent traffic](https://blog.cloudflare.com/web-bot-auth/) (2025)
 * [Beyond IP lists: a registry format for bots and agents](https://blog.cloudflare.com/agent-registry/) (2025)

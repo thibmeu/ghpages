@@ -39,6 +39,7 @@ Principal Research Engineer at Cloudflare working on privacy-preserving authenti
 ## Selected publications & writing
 
 - [Let The Right One In: Attestation as a Usable CAPTCHA Alternative](https://www.usenix.org/conference/soups2022/presentation/whalen) — SOUPS 2022.
+- [Support for modern cryptographic algorithms in Workers](https://blog.cloudflare.com/workers-ml-kem-ml-dsa-support/) — Cloudflare blog, 2026.
 - [Forget IPs: using cryptography to verify bot and agent traffic](https://blog.cloudflare.com/web-bot-auth/) — Cloudflare blog, 2025.
 - [Cloudflare audits key transparency for WhatsApp](https://blog.cloudflare.com/key-transparency/) — Cloudflare blog, 2024.
 - [Humanity wastes about 500 years per day on CAPTCHAs](https://blog.cloudflare.com/introducing-cryptographic-attestation-of-personhood/) — Cloudflare blog, 2021.
