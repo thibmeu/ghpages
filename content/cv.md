@@ -46,7 +46,7 @@ Principal Research Engineer at Cloudflare working on privacy-preserving authenti
 
 ## Open source
 
-[tlock-rs](https://github.com/thibmeu/tlock-rs) and [drand-rs](https://github.com/thibmeu/drand-rs) (timelock encryption in Rust) · [age-plugin-simplepq](https://github.com/thibmeu/age-plugin-simplepq) and [age-plugin-hpke](https://github.com/thibmeu/age-plugin-hpke) (post-quantum and HPKE plugins for age) · [ohttp-ts](https://github.com/thibmeu/ohttp-ts) (Oblivious HTTP in TypeScript) · [privacypass-ts](https://github.com/cloudflare/privacypass-ts) · [web-bot-auth](https://github.com/cloudflare/web-bot-auth)
+[tlock-rs](https://github.com/thibmeu/tlock-rs) and [drand-rs](https://github.com/thibmeu/drand-rs) (timelock encryption in Rust) · [age-plugin-simplepq](https://github.com/thibmeu/age-plugin-simplepq) and [age-plugin-hpke](https://github.com/thibmeu/age-plugin-hpke) (post-quantum and HPKE plugins for age) · [ohttp-ts](https://github.com/thibmeu/ohttp-ts) (Oblivious HTTP in TypeScript) · [privacypass-ts](https://github.com/cloudflare/privacypass-ts) (Privacy Pass in TypeScript) · [web-bot-auth](https://github.com/cloudflare/web-bot-auth) (Web Bot Auth libraries)
 
 ## Education
 
