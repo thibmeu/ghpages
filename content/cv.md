@@ -32,8 +32,8 @@ Principal Research Engineer at Cloudflare working on privacy-preserving authenti
 ## Standards & service
 
 - Chair of the IETF [Open Cloud Mesh (OCM)](https://datatracker.ietf.org/wg/ocm/about/) working group, which standardises federated file sharing.
-- [Batched Token Issuance Protocol](https://datatracker.ietf.org/doc/draft-ietf-privacypass-batched-tokens/) — draft-ietf-privacypass-batched-tokens, submitted for publication.
-- [Privacy Pass Reverse Flow](https://datatracker.ietf.org/doc/draft-meunier-privacypass-reverse-flow/) — draft-meunier-privacypass-reverse-flow, an extension of the Privacy Pass issuance flow.
+- [Batched Token Issuance Protocol](https://datatracker.ietf.org/doc/draft-ietf-privacypass-batched-tokens/), submitted for publication.
+- [Privacy Pass Reverse Flow](https://datatracker.ietf.org/doc/draft-meunier-privacypass-reverse-flow/), an extension of the Privacy Pass issuance flow.
 - Author of the Web Bot Auth drafts ([protocol](https://datatracker.ietf.org/doc/draft-ietf-webbotauth-httpsig-protocol/), [registry](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-registry/)).
 
 ## Selected publications & writing
