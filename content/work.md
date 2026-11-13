@@ -6,6 +6,8 @@ title: Work
 
 At Cloudflare I work on Privacy Pass and bot authentication. At the IETF, I write [specs](#ietf) and chair the [OCM](https://datatracker.ietf.org/wg/ocm/about/) working group.
 
+In 2025 I won the [PICCASO](https://www.piccasoawards.com/previous-winners) *Bridging the Privacy and Security Gap* award.
+
 ## IETF
 
 I chair the [Open Cloud Mesh (OCM)](https://datatracker.ietf.org/wg/ocm/about/) working group, standardising federated file sharing across organisations. At the W3C, I co-chaired [PACT](https://pactworkshop.com/), the workshop on private access control.
