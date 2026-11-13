@@ -2,11 +2,9 @@
 title: Work
 ---
 
-[IETF](#ietf) · [Cloudflare](#cloudflare) · [Code](#code) · [Presentations](#presentations)
+[IETF](#ietf) · [Cloudflare](#cloudflare) · [Awards](#awards) · [Code](#code) · [Presentations](#presentations)
 
 At Cloudflare I work on Privacy Pass and bot authentication. At the IETF, I write [specs](#ietf) and chair the [OCM](https://datatracker.ietf.org/wg/ocm/about/) working group.
-
-In 2025 I won the [PICCASO](https://www.piccasoawards.com/previous-winners) *Bridging the Privacy and Security Gap* award.
 
 ## IETF
 
@@ -36,6 +34,10 @@ More on the [IETF Datatracker](https://datatracker.ietf.org/person/ot-ietf@thiba
 * [Humanity wastes about 500 years per day on CAPTCHAs. It's time to end this madness](https://blog.cloudflare.com/introducing-cryptographic-attestation-of-personhood/) (2021)
 
 More on the [Cloudflare blog](https://blog.cloudflare.com/author/thibault/).
+
+## Awards
+
+* [Bridging the Privacy and Security Gap Award](https://www.piccasoawards.com/previous-winners) — PICCASO Awards 2025
 
 ## Code
 
